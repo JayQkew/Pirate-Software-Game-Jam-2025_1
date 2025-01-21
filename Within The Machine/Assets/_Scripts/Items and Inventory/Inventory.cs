@@ -6,7 +6,19 @@ public class Inventory : MonoBehaviour
 {
     public ItemSlot[] itemsInInventory;
     
+    
+    
+    [Header("Constraints")]
     public int inventorySize;
+
+    [SerializeField] 
+    private bool isRestricted;
+
+    [SerializeField] 
+    private List<Item> onlyContains;
+    
+    [SerializeField]
+    private List<Item> notContains;
 
     public void DisplayInventory()
     {
@@ -22,11 +34,7 @@ public class Inventory : MonoBehaviour
 
     public void AddItemToInventory(Item item)
     {
-        //check if can stack
-        
-        // check if not fill
-        
-        // make new item instance
+        if (CheckRestrictions(item)) return;
 
         int i = 0;
 
@@ -65,6 +73,8 @@ public class Inventory : MonoBehaviour
 
     public bool AddItemToInventory(ItemSlot item)
     {
+        if (!CheckRestrictions(item.itemData)) return false;
+        
         int i = 0;
 
         int freeSlot = -1;
@@ -109,6 +119,25 @@ public class Inventory : MonoBehaviour
         Debug.Log("Inventory is full. Cannot add item.");
         return false;
     }
-    
-    
+
+    bool CheckRestrictions(Item item)
+    {
+        if (!isRestricted) return false;
+        
+        if (onlyContains.Count >0)
+            if (!onlyContains.Contains(item))
+            {
+                Debug.Log($"{item.name} cannot be placed here.");
+                return false;
+            }
+        
+        if (notContains.Count >0)
+            if (notContains.Contains(item))
+            {
+                Debug.Log($"{item.name} cannot be placed here.");
+                return false;
+            }
+
+        return true;
+    }
 }

@@ -1433,6 +1433,10 @@ MonoBehaviour:
   - itemData: {fileID: 0}
     stackValue: 0
   inventorySize: 3
+  isRestricted: 0
+  onlyContains: []
+  notContains:
+  - {fileID: 11400000, guid: e4021f1fae0dcd54281a8753f8f70483, type: 2}
 --- !u!4 &1548573998
 Transform:
   m_ObjectHideFlags: 0
@@ -1861,6 +1865,9 @@ MonoBehaviour:
   - itemData: {fileID: 0}
     stackValue: 0
   inventorySize: 4
+  isRestricted: 0
+  onlyContains: []
+  notContains: []
 --- !u!212 &2142992356
 SpriteRenderer:
   m_ObjectHideFlags: 0
