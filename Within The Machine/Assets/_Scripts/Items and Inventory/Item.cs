@@ -36,6 +36,17 @@ public class ItemSlot
         stackValue += amount;
     }
 
+    public void RemoveFromStack(int amount = 1)
+    {
+        if (stackValue - amount < 0)
+        {
+            Debug.LogWarning("Stack cannot be less than 0");
+            return;
+        }
+        
+        stackValue -= amount;
+    }
+
     public bool isEmpty()
     {
         return  itemData == null || itemData.stackAmount == 0;

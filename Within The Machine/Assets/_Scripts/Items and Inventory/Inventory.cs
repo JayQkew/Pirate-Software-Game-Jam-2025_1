@@ -63,7 +63,7 @@ public class Inventory : MonoBehaviour
         Debug.Log("Inventory is full. Cannot add item.");
     }
 
-    public void AddItemToInventory(ItemSlot item)
+    public bool AddItemToInventory(ItemSlot item)
     {
         int i = 0;
 
@@ -75,11 +75,20 @@ public class Inventory : MonoBehaviour
             if (!checkedItem.isEmpty())
             {
                 if (checkedItem.itemData.name == item.itemData.name)
-                    if (checkedItem.stackValue + item.stackValue < checkedItem.itemData.stackAmount)
+                {
+                    if (checkedItem.stackValue + item.stackValue <= checkedItem.itemData.stackAmount)
                     {
                         checkedItem.AddToStack(item.stackValue);
-                        return;
+                        return true;
                     }
+                    else
+                    {
+                        int diff = checkedItem.itemData.stackAmount - checkedItem.stackValue;
+                        checkedItem.AddToStack(diff);
+                        item.RemoveFromStack(diff);
+                    }
+                }
+                    
             }
             else
             {
@@ -92,12 +101,13 @@ public class Inventory : MonoBehaviour
 
         if (freeSlot != -1)
         {
-            itemsInInventory[freeSlot] = item;
-            return;
+            itemsInInventory[freeSlot].SetItem(item);
+            return true;
         }
         
         
         Debug.Log("Inventory is full. Cannot add item.");
+        return false;
     }
     
     
