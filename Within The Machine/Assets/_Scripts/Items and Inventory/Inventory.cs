@@ -34,7 +34,7 @@ public class Inventory : MonoBehaviour
 
     public void AddItemToInventory(Item item)
     {
-        if (CheckRestrictions(item)) return;
+        if (ItemIsRestricted(item)) return;
 
         int i = 0;
 
@@ -73,7 +73,7 @@ public class Inventory : MonoBehaviour
 
     public bool AddItemToInventory(ItemSlot item)
     {
-        if (!CheckRestrictions(item.itemData)) return false;
+        if (ItemIsRestricted(item.itemData)) return false;
         
         int i = 0;
 
@@ -120,24 +120,72 @@ public class Inventory : MonoBehaviour
         return false;
     }
 
-    bool CheckRestrictions(Item item)
+    bool ItemIsRestricted(Item item)
     {
         if (!isRestricted) return false;
         
         if (onlyContains.Count >0)
+        {
             if (!onlyContains.Contains(item))
             {
                 Debug.Log($"{item.name} cannot be placed here.");
-                return false;
+                return true;
             }
-        
-        if (notContains.Count >0)
+        }
+        else if (notContains.Count >0)
+        {
             if (notContains.Contains(item))
             {
                 Debug.Log($"{item.name} cannot be placed here.");
-                return false;
+                return true;
             }
+        }
+        
+        return false;
+    }
 
+    public int CountItem(Item item)
+    {
+        int count = 0;
+
+        foreach (ItemSlot itemSlot in itemsInInventory)
+        {
+            if (itemSlot.itemData == item)
+                count += itemSlot.stackValue;
+        }
+        
+        return count;
+    }
+
+    public bool RemoveItems(Item item, int amount)
+    {
+        if (amount > CountItem(item))
+        {
+            Debug.Log($"Insufficient amount of {item.name} to remove.");
+            return false;
+        }
+
+        int index = 0;
+        while (amount > 0)
+        {
+            ItemSlot itemSlot = itemsInInventory[index];
+            if (!itemSlot.isEmpty())
+            {
+                if (itemSlot.itemData.name == item.name)
+                {
+                    if (itemSlot.stackValue < amount)
+                    {
+                        amount -= itemSlot.stackValue;
+                        itemSlot.RemoveFromStack(itemSlot.stackValue);
+                    }
+                    else
+                    {
+                        itemSlot.RemoveFromStack(amount);
+                        amount = 0;
+                    }
+                }
+            }
+        }
         return true;
     }
 }
