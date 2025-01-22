@@ -157,7 +157,7 @@ public class Inventory : MonoBehaviour
         return count;
     }
 
-    public bool RemoveItems(Item item, int amount)
+    public bool RemoveItems(Item item, int amount = 1)
     {
         if (amount > CountItem(item))
         {
@@ -185,7 +185,26 @@ public class Inventory : MonoBehaviour
                     }
                 }
             }
+            index++;
         }
         return true;
+    }
+
+    public ItemSlot GetItemSlot(int index)
+    {
+        return itemsInInventory[index];
+    }
+
+
+    public int NumberOfItemsInInventory()
+    {
+        int count = 0;
+
+        foreach (ItemSlot itemSlot in itemsInInventory)
+        {
+            count += itemSlot.stackValue;
+        }
+
+        return count;
     }
 }

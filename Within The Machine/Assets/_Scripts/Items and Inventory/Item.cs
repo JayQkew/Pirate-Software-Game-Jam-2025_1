@@ -9,6 +9,10 @@ public class Item : ScriptableObject
     public Sprite icon;
     public string description;
     public int stackAmount;
+
+    [Header("Fuel")]
+    public bool isFuel;
+    public float fuelAmount;
 }
 
 
@@ -51,7 +55,7 @@ public class ItemSlot
 
     public bool isEmpty()
     {
-        return  itemData == null || itemData.stackAmount == 0;
+        return  itemData == null || stackValue == 0;
     }
 
     public void MakeEmpty()
