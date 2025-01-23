@@ -31,23 +31,4 @@ public class ParalaxLayers : MonoBehaviour
             materials[i].SetTextureOffset("_MainTex", Vector2.right * distances[i]);
         }
     }
-
-    private void OnValidate()
-    {
-        if (layers == null) return;
-
-        // Resize speedRatios array if necessary
-        if (speedRatios == null || speedRatios.Length != layers.Length)
-        {
-            float[] newSpeedRatios = new float[layers.Length];
-
-            // Copy existing values to the new array
-            for (int i = 0; i < newSpeedRatios.Length; i++)
-            {
-                newSpeedRatios[i] = i < speedRatios?.Length ? speedRatios[i] : 1f;
-            }
-
-            speedRatios = newSpeedRatios;
-        }
-    }
 }
