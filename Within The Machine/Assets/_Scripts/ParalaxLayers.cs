@@ -12,7 +12,8 @@ public class ParalaxLayers : MonoBehaviour
     private float[] distances;
     public float[] speedRatios;
     public float machineSpeed;
-
+    public Animator mech_animator;
+    
     private void Start()
     {
         materials = new Material[layers.Length];
@@ -30,5 +31,7 @@ public class ParalaxLayers : MonoBehaviour
             distances[i] += Time.deltaTime * speedRatios[i] * machineSpeed;
             materials[i].SetTextureOffset("_MainTex", Vector2.right * distances[i]);
         }
+        
+        mech_animator.speed = machineSpeed;
     }
 }
