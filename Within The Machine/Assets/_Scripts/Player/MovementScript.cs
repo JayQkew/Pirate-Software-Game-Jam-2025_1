@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.PlayerLoop;
@@ -19,17 +20,27 @@ public class MovementScript : MonoBehaviour
     public bool closeToLadder = false;
     [SerializeField] private float climbingSpeed = 4f;
     
+    [Header("Jump Movement")]
+    [SerializeField] private float jumpHeight = 2f;
+    [SerializeField] private bool canJump = true;
+    [SerializeField] private float rayDist = 0.02f;
+    [SerializeField] private int theLayer = 3;
+    private int targetLayerJump;
+    [SerializeField] private float FallGravity = 10f;
+    [SerializeField] private RaycastHit2D hit;
+   
     void Awake()
     {
        controls = new InputMaster(); 
        
-       controls.Player.Movement.performed += context => MovePlayer(context.ReadValue<Vector2>());
+       controls.Player.Movement.performed += contextMove => MovePlayer(contextMove.ReadValue<Vector2>());
+       controls.Player.Jump.performed += cntJump => JumpPlayer();
     }
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        targetLayerJump = 1 << theLayer;
     }
 
     // Update is called once per frame
@@ -60,18 +71,22 @@ public class MovementScript : MonoBehaviour
             rb.gravityScale = 1;
         }
         //------------------------------------------------------------------------------
-
-        if (Input.GetKeyDown(KeyCode.Space))
+        
+       
+        hit = Physics2D.Raycast(transform.position, Vector2.down, rayDist, targetLayerJump);
+        Debug.DrawRay(transform.position, Vector2.down * rayDist, Color.magenta);
+        
+        if (hit)
         {
-            if (closeToLadder)
-            {
-                closeToLadder = false;
-            }
-            else
-            {
-                closeToLadder = true;
-            }
+            canJump = true;
+            rb.gravityScale = 1;
         }
+        else
+        {
+            canJump = false;
+            rb.gravityScale = FallGravity;
+        }
+        
     }
 
     void FixedUpdate()
@@ -86,12 +101,22 @@ public class MovementScript : MonoBehaviour
 
         if (Direction.x != 0 && !closeToLadder) //Left to right movement
         {
-            rb.velocity = new Vector2(Direction.x * movementSpeed, -1);
+            rb.velocity = new Vector2(Direction.x * movementSpeed, rb.velocity.y);
         }
         
         else if (closeToLadder) //Movement on ladder
         {
             rb.velocity = new Vector2(Direction.x * movementSpeed, Direction.y * climbingSpeed); 
+        }
+    }
+    
+    // Makes the Player Jump
+    private void JumpPlayer()
+    {
+       
+        if (canJump)
+        {
+            rb.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
         }
     }
 

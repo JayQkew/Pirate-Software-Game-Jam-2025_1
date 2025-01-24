@@ -186,6 +186,11 @@ MonoBehaviour:
   rb: {fileID: 279795431}
   closeToLadder: 0
   climbingSpeed: 3
+  jumpHeight: 12
+  canJump: 0
+  rayDist: 0.35
+  theLayer: 3
+  FallGravity: 5
 --- !u!212 &279795433
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -394,7 +399,7 @@ GameObject:
   - component: {fileID: 667924611}
   - component: {fileID: 667924610}
   - component: {fileID: 667924609}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
