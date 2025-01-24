@@ -13,6 +13,10 @@ public class Item : ScriptableObject
     [Header("Fuel")]
     public bool isFuel;
     public float fuelAmount;
+    
+    [Header("Ammo")]
+    public bool isAmmo;
+    public float ammoAmount;
 }
 
 

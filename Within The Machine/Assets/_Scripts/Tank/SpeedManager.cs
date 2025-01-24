@@ -39,20 +39,20 @@ public class SpeedManager : MonoBehaviour
 
     void SpeedUp()
     {
-        Debug.Log("Speed up");
+        //Debug.Log("Speed up");
         currentSpeed += speedDrag *Time.deltaTime;
         if (currentSpeed > speedSetting) currentSpeed = speedSetting;
     }
 
     void SlowDown()
     {
-        Debug.Log("Slow");
+        //Debug.Log("Slow");
 
         float minVal = speedSetting;
 
         if (!_furnace.isPowering)
         {
-            Debug.Log("power off");
+            //Debug.Log("power off");
             minVal = 0;
         }
 

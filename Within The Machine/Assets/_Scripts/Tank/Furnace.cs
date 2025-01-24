@@ -44,7 +44,7 @@ public class Furnace : MonoBehaviour
         while (currentFuel == null && step < inputInventory.itemsInInventory.Length)
         {
             ItemSlot itemSlot = inputInventory.GetItemSlot(step);
-            Debug.Log(itemSlot.isEmpty());
+            //Debug.Log(itemSlot.isEmpty());
             if (!itemSlot.isEmpty())
             {
                 currentFuel = itemSlot.itemData;
