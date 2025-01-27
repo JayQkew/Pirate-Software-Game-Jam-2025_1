@@ -184,6 +184,7 @@ MonoBehaviour:
   movementSpeed: 5
   playerTransform: {fileID: 279795434}
   rb: {fileID: 279795431}
+  lookingLeft: 1
   closeToLadder: 0
   climbingSpeed: 3
   jumpHeight: 12
@@ -191,6 +192,13 @@ MonoBehaviour:
   rayDist: 0.35
   theLayer: 3
   FallGravity: 5
+  dashSpeed: 10
+  canDash: 1
+  isDashing: 0
+  dashCooldown: 1
+  timerDashC: 0
+  dashDuration: 0.5
+  timerdashD: 0
 --- !u!212 &279795433
 SpriteRenderer:
   m_ObjectHideFlags: 0
