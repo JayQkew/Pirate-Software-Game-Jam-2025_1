@@ -23,6 +23,15 @@ public class CharacterGUI : MonoBehaviour
     [SerializeField] private float maxTiltAngle;
     [SerializeField] private float restAngle;
     [SerializeField] private float tiltSpeed;
+    [SerializeField] private float overshootFactor = 1.2f; // How much to overshoot
+    [SerializeField] private float dampingSpeed = 2f; // Speed of damping correction
+
+    private float currentTiltVelocity; // Stores velocity for smooth damping
+    private float currentTiltAngle; // Keeps track of the current tilt angle
+    private float tiltVelocity = 0f;     
+    [SerializeField] private float springFrequency = 2f; // How "bouncy" the spring is
+    [SerializeField] private float springDamping = 0.5f; // How much damping the spring has (0 = no damping, 1 = critical damping)
+
 
     void Update()
     {
@@ -47,11 +56,27 @@ public class CharacterGUI : MonoBehaviour
         Vector2 inputVector = movementScript.controls.Player.Movement.ReadValue<Vector2>();
         float horizontalInput = inputVector.x;
 
-        // Calculate target rotation angle based on horizontal input
-        float targetAngle = horizontalInput == 0 ? restAngle : horizontalInput > 0 ? -maxTiltAngle : maxTiltAngle;
+        // Determine target angle
+        float targetAngle = restAngle; // Default to 90 degrees
+        if (horizontalInput != 0)
+        {
+            // Tilt left or right based on input
+            targetAngle = restAngle + (horizontalInput > 0 ? -maxTiltAngle : maxTiltAngle);
+        }
 
-        // Smoothly interpolate to the target angle
-        Vector3 targetRotation = new Vector3(0f, 0f, targetAngle);
-        bodyBone.transform.eulerAngles = Vector3.Lerp(bodyBone.transform.eulerAngles, targetRotation, Time.deltaTime * tiltSpeed);
+        // Spring-damper system
+        float angularFrequency = springFrequency * 2 * Mathf.PI; // Convert frequency to angular frequency
+        float dampingRatio = springDamping;
+        float dt = Time.deltaTime;
+
+        // Calculate spring force and damping
+        float force = -angularFrequency * angularFrequency * (currentTiltAngle - targetAngle) - 2 * dampingRatio * angularFrequency * tiltVelocity;
+
+        // Update velocity and angle
+        tiltVelocity += force * dt;
+        currentTiltAngle += tiltVelocity * dt;
+
+        // Apply the tilt to the bodyBone
+        bodyBone.transform.rotation = Quaternion.Euler(0f, 0f, currentTiltAngle);
     }
 }
