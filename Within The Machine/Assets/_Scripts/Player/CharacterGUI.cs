@@ -8,29 +8,21 @@ public class CharacterGUI : MonoBehaviour
     [Space(10)]
     
     [SerializeField] private GameObject RightIKTarget;
-    [SerializeField] private bool rightHolding;
     [SerializeField] private GameObject LeftIKTarget;    
-    [SerializeField] private bool leftHolding;
 
     [SerializeField] private Transform holdingTarget;
-    [SerializeField] private Transform rightRestingPosition;
-    [SerializeField] private Transform leftRestingPosition;
     [SerializeField] private float movementSpeed = 5f; // Speed of the smooth movement
-    
     [Space(10)]
     
     [SerializeField] private GameObject bodyBone;
     [SerializeField] private float maxTiltAngle;
     [SerializeField] private float restAngle;
     [SerializeField] private float tiltSpeed;
-    [SerializeField] private float overshootFactor = 1.2f; // How much to overshoot
-    [SerializeField] private float dampingSpeed = 2f; // Speed of damping correction
 
-    private float currentTiltVelocity; // Stores velocity for smooth damping
-    private float currentTiltAngle; // Keeps track of the current tilt angle
+    private float currentAngle; // Keeps track of the current tilt angle
     private float tiltVelocity = 0f;     
-    [SerializeField] private float springFrequency = 2f; // How "bouncy" the spring is
-    [SerializeField] private float springDamping = 0.5f; // How much damping the spring has (0 = no damping, 1 = critical damping)
+    [SerializeField, Tooltip("How BOUNCY the spring is")] private float springFrequency = 2f; 
+    [SerializeField, Tooltip("How much DAMPING the spring has (0 = no damping, 1 = critical damping)")] private float springDamping = 0.5f; 
 
 
     void Update()
@@ -42,8 +34,8 @@ public class CharacterGUI : MonoBehaviour
     private void MoveIKTargets()
     {
         // Calculate target positions relative to the character
-        Vector2 rightTargetPosition = !rightHolding ? rightRestingPosition.position : holdingTarget.position;
-        Vector2 leftTargetPosition = !leftHolding ? leftRestingPosition.position : holdingTarget.position;
+        Vector2 rightTargetPosition = holdingTarget.position;
+        Vector2 leftTargetPosition = holdingTarget.position;
 
         // Smoothly move the IK targets toward their respective positions
         RightIKTarget.transform.position = Vector2.Lerp(RightIKTarget.transform.position, rightTargetPosition, Time.deltaTime * movementSpeed);
@@ -56,27 +48,36 @@ public class CharacterGUI : MonoBehaviour
         Vector2 inputVector = movementScript.controls.Player.Movement.ReadValue<Vector2>();
         float horizontalInput = inputVector.x;
 
-        // Determine target angle
-        float targetAngle = restAngle; // Default to 90 degrees
+        float targetAngle = restAngle;
         if (horizontalInput != 0)
         {
-            // Tilt left or right based on input
             targetAngle = restAngle + (horizontalInput > 0 ? -maxTiltAngle : maxTiltAngle);
         }
 
-        // Spring-damper system
-        float angularFrequency = springFrequency * 2 * Mathf.PI; // Convert frequency to angular frequency
-        float dampingRatio = springDamping;
-        float dt = Time.deltaTime;
+        // Spring-damper system using Hooke's Law
+        // F = -k * (x - xTarget) - c * v
+        
+        //Spring Term       -k * (x - xTarget)
+        // k = w^2
+        // w = 2 * PI * f
 
-        // Calculate spring force and damping
-        float force = -angularFrequency * angularFrequency * (currentTiltAngle - targetAngle) - 2 * dampingRatio * angularFrequency * tiltVelocity;
+        float angularFrequency = 2 * Mathf.PI * springFrequency;
+        float springStiffness = angularFrequency * angularFrequency;
+        float springTerm = -springStiffness * (currentAngle - targetAngle);
+        
+        //Damping Term      -c * v
+        // c = 2 * dampingRatio * w
+        
+        float dampingCoefficient = 2 * springDamping * angularFrequency;
+        float dampingTerm = -dampingCoefficient * tiltVelocity;
+        
+        // Calculate spring force
+        float springForce = springTerm + dampingTerm;
 
         // Update velocity and angle
-        tiltVelocity += force * dt;
-        currentTiltAngle += tiltVelocity * dt;
+        tiltVelocity += springForce * Time.deltaTime;
+        currentAngle += tiltVelocity * Time.deltaTime;
 
-        // Apply the tilt to the bodyBone
-        bodyBone.transform.rotation = Quaternion.Euler(0f, 0f, currentTiltAngle);
+        bodyBone.transform.rotation = Quaternion.Euler(0f, 0f, currentAngle);
     }
 }
