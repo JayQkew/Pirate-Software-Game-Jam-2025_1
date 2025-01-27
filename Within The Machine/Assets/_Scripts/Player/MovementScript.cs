@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -9,39 +10,54 @@ using UnityEngine.Serialization;
 
 public class MovementScript : MonoBehaviour
 {
+    [Header("Movement Features")]
+    [SerializeField] private bool DashOn = true;
+    [SerializeField] private bool JumpOn = true;
+    [SerializeField] private bool LadderOn = true;
+    [SerializeField] private bool LadderSlideOn = true;
+    
+   
     [Header("Player Movement")]
-    [SerializeField] private float movementSpeed = 5f;
+    [SerializeField] private float movementSpeed = 220f;
     [SerializeField] private Transform playerTransform;
     [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private Sprite playerSprite; //Please drag in the player sprite
     public InputMaster controls;
     private Vector2 InputVector;
     [SerializeField] private bool lookingLeft = true;
     
     [Header("Ladder Movement")]
     public bool closeToLadder = false;
-    [SerializeField] private float climbingSpeed = 4f;
+    [SerializeField] private float climbingSpeed = 120f;
+    [SerializeField] private float downSpeed;
+    [SerializeField] private float slideSpeed = 350f; //Speed for when sliding down ladder
+    [SerializeField] private float timeTillSlide = 0.5f;
+    [SerializeField] private float timerSlide;
+    [SerializeField] private bool slideStarted = false;
     
     [Header("Jump Movement")]
-    [SerializeField] private float jumpHeight = 2f;
+    [SerializeField] private float jumpHeight = 17f;
     [SerializeField] private bool canJump = true;
-    [SerializeField] private float rayDist = 0.02f;
+    [SerializeField] private float rayDist = 0.35f;
     [SerializeField] private int theLayer = 3;
     private int targetLayerJump;
-    [SerializeField] private float FallGravity = 10f;
-    [SerializeField] private RaycastHit2D hit;
+    [SerializeField] private float FallGravity = 7f;
+    [SerializeField] private RaycastHit2D hitLeft, hitRight;
     
     [Header("Dash Movement")]
     //Dash can be shortened or lengthened by changing the dashSpeed or the dashDuration
-    [SerializeField] private float dashSpeed = 5f;
+    [SerializeField] private float dashSpeed = 25f;
     [SerializeField] private bool canDash = true, isDashing = false;
     [SerializeField] private float dashCooldown = 1f, timerDashC;
-    [SerializeField] private float dashDuration = 0.5f;
+    [SerializeField] private float dashDuration = 0.3f;
     [SerializeField] private float timerdashD;
     private Vector2 SaveVelocity;
     
     void Awake()
     {
-       controls = new InputMaster(); 
+       controls = new InputMaster();
+       rb = gameObject.GetComponent<Rigidbody2D>();
+       //playerSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
        
        controls.Player.Movement.performed += contextMove => MovePlayer(contextMove.ReadValue<Vector2>());
        controls.Player.Jump.performed += cntJump => JumpPlayer();
@@ -52,12 +68,67 @@ public class MovementScript : MonoBehaviour
     void Start()
     {
         targetLayerJump = 1 << theLayer;
+        rb.gravityScale = FallGravity; //Makes Jump less floaty
     }
 
     // Update is called once per frame
     void Update()
     {
-       //Checks if any input is given
+       
+        
+        //Switches Gravity off if close to ladder
+        if (LadderOn &&
+            closeToLadder && 
+            !isDashing)
+        {
+            rb.gravityScale = 0;
+        }
+
+        else if (LadderOn &&
+            !closeToLadder)
+        {
+            rb.gravityScale = FallGravity; //Makes Jump less floaty
+        }
+        //------------------------------------------------------------------------------
+
+        
+        
+       // Ground check
+       Vector2 BottomLeft = new Vector2(transform.position.x - playerSprite.bounds.extents.x, transform.position.y);
+       Vector2 BottomRight = new Vector2(transform.position.x + playerSprite.bounds.extents.x, transform.position.y);
+       
+       Debug.DrawRay(BottomLeft, Vector2.down * rayDist, Color.magenta);
+       Debug.DrawRay(BottomRight, Vector2.down * rayDist, Color.magenta);
+       hitLeft = Physics2D.Raycast(BottomLeft, Vector2.down, rayDist, targetLayerJump);
+       hitRight = Physics2D.Raycast(BottomRight, Vector2.down, rayDist, targetLayerJump);
+        if (hitLeft || hitRight)
+        {
+            canJump = true;
+        }
+        else if ((!hitLeft || !hitRight) &&
+                 !closeToLadder)
+        {
+            canJump = false;
+        }
+        //-------------------------------------------------------------------------
+        
+        //Checks if the Dash is done
+        if (isDashing)
+        {
+            CalculateDashEnd(timerdashD);
+        }
+        //----------------------------------------
+        //Resets dash
+        if (!canDash)
+        {
+            ResetDashCooldown(timerdashD);
+        }
+        //----------------------------------------------
+    }
+
+    void FixedUpdate()
+    {
+        //Checks if any input is given
         Vector2 InputVector = controls.Player.Movement.ReadValue<Vector2>();
         if (InputVector != Vector2.zero && 
             !isDashing)
@@ -72,83 +143,81 @@ public class MovementScript : MonoBehaviour
         }
         //----------------------------------------------------------------------
         
-        //Switches Gravity off if close to ladder
-        if (closeToLadder == true)
+        // Checks if the player moves down on the ladder
+        if (slideStarted == true)
         {
-            rb.gravityScale = 0;
-        }
-
-        else
-        {
-            rb.gravityScale = 1;
-        }
-        //------------------------------------------------------------------------------
-        
-       // Ground check + changes gravity for less floaty jump
-        Debug.DrawRay(transform.position, Vector2.down * rayDist, Color.magenta);
-        hit = Physics2D.Raycast(transform.position, Vector2.down, rayDist, targetLayerJump);
-        if (hit)
-        {
-            canJump = true;
-            rb.gravityScale = 1;
-        }
-        else
-        {
-            canJump = false;
-            rb.gravityScale = FallGravity;
-        }
-        //-------------------------------------------------------------------------
-        
-        //Checks if the Dash is done
-        if (isDashing)
-        {
-            CalculateDashEnd(timerdashD);
+            TimeTillSlide(timerSlide);
         }
         
-        //Resets dash
-        if (!canDash)
+        if (!closeToLadder ||
+            InputVector.y >= 0)
         {
-            ResetDashCooldown(timerdashD);
+            downSpeed = climbingSpeed;
+            slideStarted = false;
         }
+        //----------------------------------------------------------------------
         
         //Flips Character
         if (InputVector.x > 0)
         {
-            transform.eulerAngles = new Vector3(0, 180, 0);
+           // transform.eulerAngles = new Vector3(0, 180, 0);
             lookingLeft = false;
         }
         
         else if (InputVector.x < 0)
         {
-            transform.eulerAngles = new Vector3(0, 0, 0);
+           // transform.eulerAngles = new Vector3(0, 0, 0);
             lookingLeft = true;
         }
-    }
-
-    void FixedUpdate()
-    {
-        
     }
     
     // Moves the Player
     private void MovePlayer(Vector2 Direction)
     {
-        if (Direction.x != 0 && !closeToLadder) //Left to right movement
+        if (Direction.x != 0 && (!closeToLadder || !LadderOn)) //Left to right movement
         {
-            rb.velocity = new Vector2(Direction.x * movementSpeed, rb.velocity.y);
+            rb.velocity = new Vector2(Direction.x * movementSpeed * Time.fixedDeltaTime, rb.velocity.y);
+            downSpeed = climbingSpeed;
+            slideStarted = false;
         }
         
-        else if (closeToLadder) //Movement on ladder
+        else if (LadderOn &&
+                 closeToLadder) //Movement on ladder
         {
-            rb.velocity = new Vector2(Direction.x * movementSpeed, Direction.y * climbingSpeed); 
+            if (Direction.y >= 0 ||
+                !LadderSlideOn) // For going up the ladder
+            {
+                downSpeed = climbingSpeed;
+                slideStarted = false;
+                rb.velocity = new Vector2(Direction.x * movementSpeed * Time.fixedDeltaTime, Direction.y * climbingSpeed * Time.fixedDeltaTime); 
+            }
+
+            else if (LadderSlideOn &&
+                     Direction.y < 0)  //Allows the player to slide down the ladder-faster movement when going down ladder
+            {
+                    if (slideStarted == false)
+                    {
+                        timerSlide = Time.time;
+                        slideStarted = true;
+                    }
+                    rb.velocity = new Vector2(Direction.x * movementSpeed * Time.fixedDeltaTime, Direction.y * downSpeed * Time.fixedDeltaTime);
+            }
         }
     }
-    
+
+   // Delay before the slide starts
+    private void TimeTillSlide(float timer)
+    {
+        if (Time.time - timer > timeTillSlide)
+        {
+            downSpeed = slideSpeed;
+        }
+    }
     // Makes the Player Jump
     private void JumpPlayer()
     {
-       
-        if (canJump)
+        if (JumpOn &&
+            canJump)
         {
             rb.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
         }
@@ -157,22 +226,30 @@ public class MovementScript : MonoBehaviour
     //Makes the player Dash
     private void DashPlayer()
     {
-        if (canDash)
+        if (DashOn)
         {
-            SaveVelocity = rb.velocity;
-            if (lookingLeft)
+            isDashing = true;
+            if (canDash)
             {
-                rb.AddForce(Vector2.left * dashSpeed, ForceMode2D.Impulse);
+                isDashing = true;
+                SaveVelocity = new Vector2(rb.velocity.x, -FallGravity);
+                if (lookingLeft)
+                {
+                    rb.AddForce(Vector2.left * dashSpeed, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    rb.AddForce(Vector2.right * dashSpeed, ForceMode2D.Impulse);
+                }
+            
+                canDash = false;
+                timerdashD = Time.time;
+                timerDashC = timerdashD;
             }
             else
             {
-                rb.AddForce(Vector2.right * dashSpeed, ForceMode2D.Impulse);
+                isDashing = false;
             }
-            
-            canDash = false;
-            timerdashD = Time.time;
-            timerDashC = timerdashD;
-            isDashing = true;
         }
     }
 
