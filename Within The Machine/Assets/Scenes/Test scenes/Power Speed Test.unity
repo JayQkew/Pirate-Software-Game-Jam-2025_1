@@ -3616,7 +3616,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentSpeed: 0
-  speedSetting: 0
+  speedSetting: 1
   speedDrag: 1
   paralax: {fileID: 1037493258}
   visualSpeedMultiple: 0.2
@@ -3846,6 +3846,7 @@ MonoBehaviour:
   _speedManager: {fileID: 1364716009}
   _paralaxLayers: {fileID: 1037493258}
   rb: {fileID: 0}
+  tankMoveOffset: 0
 --- !u!212 &1392768863
 SpriteRenderer:
   m_ObjectHideFlags: 0
