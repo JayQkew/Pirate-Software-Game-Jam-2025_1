@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FMOD;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -31,7 +32,7 @@ public class Enemy : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(-currentSpeed - (_paralaxLayers.speedRatios[5] * _paralaxLayers.machineSpeed), 0);
+        rb.velocity = new Vector2(-currentSpeed - (_paralaxLayers.speedRatios[5] * _paralaxLayers.machineSpeed * tankMoveOffset), 0);
     }
 
 

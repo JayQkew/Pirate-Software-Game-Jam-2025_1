@@ -14,6 +14,7 @@ public class CharacterGUI : MonoBehaviour
     [SerializeField] private float movementSpeed = 5f; // Speed of the smooth movement
     [Space(10)]
     
+    [Header("Spring Behaviour")]
     [SerializeField] private GameObject bodyBone;
     [SerializeField] private float maxTiltAngle;
     [SerializeField] private float restAngle;
@@ -24,11 +25,18 @@ public class CharacterGUI : MonoBehaviour
     [SerializeField, Tooltip("How BOUNCY the spring is")] private float springFrequency = 2f; 
     [SerializeField, Tooltip("How much DAMPING the spring has (0 = no damping, 1 = critical damping)")] private float springDamping = 0.5f; 
 
+    [Header("Eye Behaviour")]
+    [SerializeField] private float lookSpeed;
+    [SerializeField] private GameObject iris;
+    [SerializeField] private Transform lookLeft;
+    [SerializeField] private Transform lookRight;
+    [SerializeField] private Transform lookMiddle;
 
     void Update()
     {
         MoveIKTargets();
         TiltGUI();
+        EyeBehaviour();
     }
 
     private void MoveIKTargets()
@@ -79,5 +87,22 @@ public class CharacterGUI : MonoBehaviour
         currentAngle += tiltVelocity * Time.deltaTime;
 
         bodyBone.transform.rotation = Quaternion.Euler(0f, 0f, currentAngle);
+    }
+
+    private void EyeBehaviour()
+    {
+        Vector2 inputVector = movementScript.controls.Player.Movement.ReadValue<Vector2>();
+        float horizontalInput = inputVector.x;
+
+        if (horizontalInput > 0){
+            iris.transform.position = Vector3.Lerp(iris.transform.position, lookRight.position, Time.deltaTime * lookSpeed);
+        }
+        else if (horizontalInput < 0){
+            iris.transform.position = Vector3.Lerp(iris.transform.position, lookLeft.position, Time.deltaTime * lookSpeed);
+        }
+        else
+        {
+            iris.transform.position = Vector3.Lerp(iris.transform.position, lookMiddle.position, Time.deltaTime * lookSpeed);
+        }
     }
 }
