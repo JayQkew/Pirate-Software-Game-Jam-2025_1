@@ -20,6 +20,8 @@ public class Enemy : MonoBehaviour
     public ParalaxLayers _paralaxLayers;
     public Rigidbody2D rb;
 
+    public float tankMoveOffset;
+
     private void Awake()
     {
         health = maxHealth;
@@ -29,7 +31,7 @@ public class Enemy : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(-currentSpeed - _paralaxLayers.speedRatios[5] * _paralaxLayers.machineSpeed, 0);
+        rb.velocity = new Vector2(-currentSpeed - (_paralaxLayers.speedRatios[5] * _paralaxLayers.machineSpeed), 0);
     }
 
 

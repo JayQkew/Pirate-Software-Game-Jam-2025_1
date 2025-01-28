@@ -2,11 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 public class Weapon : MonoBehaviour
 {
     [SerializeField]
     private Inventory inputInventory;
+
+    [SerializeField] protected EventReference fireSound;
     
     [Header("Stats")]
     public float damage;
@@ -30,6 +33,7 @@ public class Weapon : MonoBehaviour
 
         if (FireWeapon())
         {
+            PlaySound();
             currentAmmo -= shotAmmoCost;
             StartCoroutine(StartCoolDown());
         }
@@ -89,5 +93,10 @@ public class Weapon : MonoBehaviour
         canFire = false;
         yield return new WaitForSeconds(1 / fireRate);
         canFire = true;
+    }
+
+    void PlaySound()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(fireSound);
     }
 }
