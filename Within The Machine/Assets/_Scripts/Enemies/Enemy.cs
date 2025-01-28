@@ -7,13 +7,13 @@ public class Enemy : MonoBehaviour
 {
     [Header("Stats")]
     public float maxHealth;
-    public float speed;
+    public float moveSpeed;
     public float damage;
     
     
     [Header("Current Stats")]
     public float health;
-    public float currentSpeed;
+    public float debuffSpeed;
     
     [Header("References")]
     public SpeedManager _speedManager;
@@ -25,13 +25,17 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         health = maxHealth;
-        currentSpeed = speed;
+        //currentSpeed = speed;
         rb = GetComponent<Rigidbody2D>();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        rb.velocity = new Vector2(-currentSpeed - (_paralaxLayers.speedRatios[5] * _paralaxLayers.machineSpeed), 0);
+        float xVelocity = moveSpeed;
+        xVelocity -= debuffSpeed;
+        xVelocity += _paralaxLayers.speedRatios[5] * _paralaxLayers.machineSpeed * tankMoveOffset;
+        //rb.velocity = new Vector2(-xVelocity, 0);
+        transform.Translate(-xVelocity * Time.deltaTime, 0, 0);
     }
 
 
@@ -51,9 +55,9 @@ public class Enemy : MonoBehaviour
     private IEnumerator DamageEffect()
     {
         gameObject.GetComponent<SpriteRenderer>().color = Color.red;
-        currentSpeed *= .5f;
+        debuffSpeed = moveSpeed *.5f;
         yield return new WaitForSeconds(.1f);
-        currentSpeed = speed;
+        debuffSpeed = 0;
         gameObject.GetComponent<SpriteRenderer>().color = Color.white;
     }
 

@@ -3846,7 +3846,7 @@ MonoBehaviour:
   _speedManager: {fileID: 1364716009}
   _paralaxLayers: {fileID: 1037493258}
   rb: {fileID: 0}
-  tankMoveOffset: 0
+  tankMoveOffset: 175
 --- !u!212 &1392768863
 SpriteRenderer:
   m_ObjectHideFlags: 0
