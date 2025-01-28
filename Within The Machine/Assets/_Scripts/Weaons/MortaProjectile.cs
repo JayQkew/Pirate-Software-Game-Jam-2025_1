@@ -11,6 +11,8 @@ public class MortaProjectile : MonoBehaviour
     private float damage;
     
     public float explodeAtY = 0f; // Set the Y position at which the projectile explodes
+    public GameObject explodeEffect;
+    public float explosionRadius = 5;
     
 
     public void Launch(Vector3 start, Vector3 target, float duration, float damage)
@@ -62,6 +64,8 @@ public class MortaProjectile : MonoBehaviour
     private void Explode()
     {
         Debug.Log("Explode");
+        GameObject obj = Instantiate(explodeEffect, transform.position, Quaternion.identity);
+        obj.GetComponent<Explosion>().Explode(damage, explosionRadius);
         Destroy(gameObject);
     }
 }

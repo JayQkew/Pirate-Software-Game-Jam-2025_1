@@ -21,12 +21,15 @@ public class Enemy : MonoBehaviour
     public Rigidbody2D rb;
 
     public float tankMoveOffset;
+    private Color originalColor;
 
     private void Awake()
     {
         health = maxHealth;
         //currentSpeed = speed;
         rb = GetComponent<Rigidbody2D>();
+        originalColor = GetComponent<SpriteRenderer>().color;
+        _paralaxLayers = GameObject.FindGameObjectWithTag("Paralax").GetComponent<ParalaxLayers>();
     }
 
     private void Update()
@@ -58,7 +61,7 @@ public class Enemy : MonoBehaviour
         debuffSpeed = moveSpeed *.5f;
         yield return new WaitForSeconds(.1f);
         debuffSpeed = 0;
-        gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+        gameObject.GetComponent<SpriteRenderer>().color = originalColor;
     }
 
     void Die()
