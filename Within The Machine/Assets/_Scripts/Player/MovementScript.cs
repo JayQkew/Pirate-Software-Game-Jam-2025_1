@@ -25,6 +25,7 @@ public class MovementScript : MonoBehaviour
     public InputMaster controls;
     private Vector2 InputVector;
     [SerializeField] private bool lookingLeft = true;
+    [SerializeField] private ParticlesController PC_Script;
     
     [Header("Ladder Movement")]
     public bool closeToLadder = false;
@@ -37,7 +38,7 @@ public class MovementScript : MonoBehaviour
     
     [Header("Jump Movement")]
     [SerializeField] private float jumpHeight = 17f;
-    [SerializeField] private bool canJump = true;
+    [SerializeField] private bool canJump = true, isJumping = false, isGrounded = false;
     [SerializeField] private float rayDist = 0.35f;
     [SerializeField] private int theLayer = 3;
     private int targetLayerJump;
@@ -52,6 +53,7 @@ public class MovementScript : MonoBehaviour
     [SerializeField] private float dashDuration = 0.3f;
     [SerializeField] private float timerdashD;
     private Vector2 SaveVelocity;
+    [SerializeField] private TrailRenderer dashTrail;
     
     void Awake()
     {
@@ -69,13 +71,12 @@ public class MovementScript : MonoBehaviour
     {
         targetLayerJump = 1 << theLayer;
         rb.gravityScale = FallGravity; //Makes Jump less floaty
+        dashTrail.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-       
-        
         //Switches Gravity off if close to ladder
         if (LadderOn &&
             closeToLadder && 
@@ -104,11 +105,13 @@ public class MovementScript : MonoBehaviour
         if (hitLeft || hitRight)
         {
             canJump = true;
+            isGrounded = true;
         }
         else if ((!hitLeft || !hitRight) &&
                  !closeToLadder)
         {
             canJump = false;
+            isGrounded = false;
         }
         //-------------------------------------------------------------------------
         
@@ -116,6 +119,11 @@ public class MovementScript : MonoBehaviour
         if (isDashing)
         {
             CalculateDashEnd(timerdashD);
+        }
+
+        if (dashTrail.time <= 0)
+        {
+            dashTrail.enabled = false;
         }
         //----------------------------------------
         //Resets dash
@@ -140,6 +148,17 @@ public class MovementScript : MonoBehaviour
                  InputVector == Vector2.zero) // Switches drag off when climbing ladders
         {
             rb.velocity = Vector2.zero;
+            PC_Script.isRunning = false;
+        }
+        
+        else if (InputVector == Vector2.zero)
+        {
+            PC_Script.isRunning = false;  
+        }
+
+        if (InputVector != Vector2.zero && !isGrounded)
+        {
+            PC_Script.isRunning = false;
         }
         //----------------------------------------------------------------------
         
@@ -171,6 +190,7 @@ public class MovementScript : MonoBehaviour
         }
     }
     
+    
     // Moves the Player
     private void MovePlayer(Vector2 Direction)
     {
@@ -179,11 +199,21 @@ public class MovementScript : MonoBehaviour
             rb.velocity = new Vector2(Direction.x * movementSpeed * Time.fixedDeltaTime, rb.velocity.y);
             downSpeed = climbingSpeed;
             slideStarted = false;
+            if (isGrounded)
+            {
+                PC_Script.isRunning = true;
+            }
+            else
+            {
+                PC_Script.isRunning = false;
+            }
+            
         }
         
         else if (LadderOn &&
                  closeToLadder) //Movement on ladder
         {
+            PC_Script.isRunning = false;
             if (Direction.y >= 0 ||
                 !LadderSlideOn) // For going up the ladder
             {
@@ -219,7 +249,9 @@ public class MovementScript : MonoBehaviour
         if (JumpOn &&
             canJump)
         {
+            PC_Script.isRunning = false;
             rb.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
+            isJumping = true;
         }
     }
     
@@ -228,18 +260,29 @@ public class MovementScript : MonoBehaviour
     {
         if (DashOn)
         {
+            PC_Script.isRunning = false;
             isDashing = true;
             if (canDash)
             {
                 isDashing = true;
                 SaveVelocity = new Vector2(rb.velocity.x, -FallGravity);
-                if (lookingLeft)
+                if (lookingLeft) //Player dashes to the left
                 {
+                    if (isGrounded)
+                    {
+                        PC_Script.DashLeft();
+                    }
                     rb.AddForce(Vector2.left * dashSpeed, ForceMode2D.Impulse);
+                    dashTrail.enabled = true;
                 }
-                else
+                else //Player dashes to the right
                 {
+                    if (isGrounded)
+                    {
+                        PC_Script.DashRight();
+                    }
                     rb.AddForce(Vector2.right * dashSpeed, ForceMode2D.Impulse);
+                    dashTrail.enabled = true;
                 }
             
                 canDash = false;
@@ -260,6 +303,7 @@ public class MovementScript : MonoBehaviour
         {
             isDashing = false;
             rb.velocity = SaveVelocity;
+            dashTrail.enabled = false;
         }
     }
     
@@ -268,6 +312,15 @@ public class MovementScript : MonoBehaviour
         if (Time.time - timer > dashCooldown)
         {
             canDash = true;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == theLayer)
+        {
+                isGrounded = true;
+                PC_Script.Landed();
         }
     }
 
