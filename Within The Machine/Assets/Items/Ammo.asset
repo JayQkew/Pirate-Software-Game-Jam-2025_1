@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Ammo
   icon: {fileID: 0}
   description: 
-  stackAmount: 3
+  stackAmount: 1
   isFuel: 0
   fuelAmount: 0
   isAmmo: 1

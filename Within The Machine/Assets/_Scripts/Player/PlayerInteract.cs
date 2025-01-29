@@ -17,6 +17,8 @@ public class PlayerInteract : MonoBehaviour
    [SerializeField] private RaycastHit2D mousehitRight;
    [SerializeField]private RaycastHit2D[] inRangeHits;
    
+   [SerializeField]private PlayerInventory _playerInventory;
+   
     private void Awake()
     {
         mouseControls = new InputMaster();
@@ -48,6 +50,17 @@ public class PlayerInteract : MonoBehaviour
             {
                 if (inRangeHits[i].collider == mousehitLeft.collider)
                 {
+                    FloorItem floorItem = inRangeHits[i].collider.gameObject.GetComponent<FloorItem>();
+                    if (floorItem != null)
+                    {
+                        if (_playerInventory.PickupItem(floorItem.itemSlot))
+                        {
+                            Debug.Log("Pick up item");
+                            Destroy(floorItem.gameObject);
+                        }
+                        
+                    }
+                        
                     Debug.Log(inRangeHits[i].collider.name);
                 }
             }

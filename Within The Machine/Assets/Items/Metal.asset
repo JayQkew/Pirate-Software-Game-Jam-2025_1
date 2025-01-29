@@ -15,4 +15,8 @@ MonoBehaviour:
   name: Metal
   icon: {fileID: 0}
   description: From the earth, used to craft ammo
-  stackAmount: 2
+  stackAmount: 1
+  isFuel: 0
+  fuelAmount: 0
+  isAmmo: 0
+  ammoAmount: 0

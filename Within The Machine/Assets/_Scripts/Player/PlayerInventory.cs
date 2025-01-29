@@ -6,7 +6,7 @@ public class PlayerInventory : MonoBehaviour
 {
     public Inventory inventory;
 
-    public bool PickupItem(Item item)
+    public bool PickupItem(ItemSlot item)
     {
         return inventory.AddItemToInventory(item);
     }
