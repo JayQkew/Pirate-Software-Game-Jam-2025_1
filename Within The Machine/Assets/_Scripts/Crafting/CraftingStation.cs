@@ -7,6 +7,7 @@ public class CraftingStation : MonoBehaviour
 {
     public CraftingRecipe[] recipes;
     [SerializeField] private int currentRecipe;
+    //[SerializeField] private List<Item> neededItems;
     
     [Header("Inventory")]
     [SerializeField]
@@ -51,6 +52,7 @@ public class CraftingStation : MonoBehaviour
         }
 
         Debug.Log("Crafted!");
-
     }
+
+    
 }

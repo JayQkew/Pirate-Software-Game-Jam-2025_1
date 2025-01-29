@@ -32,9 +32,9 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void AddItemToInventory(Item item)
+    public bool AddItemToInventory(Item item)
     {
-        if (ItemIsRestricted(item)) return;
+        if (ISItemRestricted(item)) return false;
 
         int i = 0;
 
@@ -49,7 +49,7 @@ public class Inventory : MonoBehaviour
                     if (checkedItem.stackValue < checkedItem.itemData.stackAmount)
                     {
                         checkedItem.AddToStack();
-                        return;
+                        return true;
                     }
             }
             else
@@ -64,16 +64,17 @@ public class Inventory : MonoBehaviour
         if (freeSlot != -1)
         {
             itemsInInventory[freeSlot] = new ItemSlot(item);
-            return;
+            return true;
         }
         
         
         Debug.Log("Inventory is full. Cannot add item.");
+        return false;
     }
 
     public bool AddItemToInventory(ItemSlot item)
     {
-        if (ItemIsRestricted(item.itemData)) return false;
+        if (ISItemRestricted(item.itemData)) return false;
         
         int i = 0;
 
@@ -120,7 +121,7 @@ public class Inventory : MonoBehaviour
         return false;
     }
 
-    bool ItemIsRestricted(Item item)
+    bool ISItemRestricted(Item item)
     {
         if (!isRestricted) return false;
         
@@ -206,5 +207,10 @@ public class Inventory : MonoBehaviour
         }
 
         return count;
+    }
+
+    public void RemoveItemIndex(int index)
+    {
+        itemsInInventory[index].MakeEmpty();
     }
 }
