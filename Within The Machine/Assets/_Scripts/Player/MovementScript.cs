@@ -266,12 +266,13 @@ public class MovementScript : MonoBehaviour
             {
                 isDashing = true;
                 SaveVelocity = new Vector2(rb.velocity.x, -FallGravity);
-                if (lookingLeft)
+                if (lookingLeft) //Player dashes to the left
                 {
+                    PC_Script.DashLeft();
                     rb.AddForce(Vector2.left * dashSpeed, ForceMode2D.Impulse);
                     dashTrail.enabled = true;
                 }
-                else
+                else //Player dashes to the right
                 {
                     rb.AddForce(Vector2.right * dashSpeed, ForceMode2D.Impulse);
                     dashTrail.enabled = true;

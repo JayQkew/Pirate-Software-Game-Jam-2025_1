@@ -7,6 +7,7 @@ public class ParticlesController : MonoBehaviour
     [Header("Particles")] 
     [SerializeField] private ParticleSystem MoveParticles;
     [SerializeField] private ParticleSystem FallParticles;
+    [SerializeField] private ParticleSystem DashLeftParticles;
 
     [Range(0,1)]
     [SerializeField] private float spawnMoveDustPeriod; //used to control how frequent the movement particles need to spawn.
@@ -38,5 +39,10 @@ public class ParticlesController : MonoBehaviour
     public void Landed()
     {
         FallParticles.Play();
+    }
+
+    public void DashLeft()
+    {
+        DashLeftParticles.Play();
     }
 }
