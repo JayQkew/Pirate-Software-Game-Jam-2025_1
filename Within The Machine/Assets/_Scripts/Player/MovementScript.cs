@@ -268,12 +268,19 @@ public class MovementScript : MonoBehaviour
                 SaveVelocity = new Vector2(rb.velocity.x, -FallGravity);
                 if (lookingLeft) //Player dashes to the left
                 {
-                    PC_Script.DashLeft();
+                    if (isGrounded)
+                    {
+                        PC_Script.DashLeft();
+                    }
                     rb.AddForce(Vector2.left * dashSpeed, ForceMode2D.Impulse);
                     dashTrail.enabled = true;
                 }
                 else //Player dashes to the right
                 {
+                    if (isGrounded)
+                    {
+                        PC_Script.DashRight();
+                    }
                     rb.AddForce(Vector2.right * dashSpeed, ForceMode2D.Impulse);
                     dashTrail.enabled = true;
                 }
