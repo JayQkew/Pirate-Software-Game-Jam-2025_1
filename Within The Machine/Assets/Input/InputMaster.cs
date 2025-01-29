@@ -55,9 +55,18 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Interact"",
+                    ""name"": ""LeftMB"",
                     ""type"": ""Button"",
                     ""id"": ""fabb9558-ce06-4c10-894f-f588ca73f445"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RightMB"",
+                    ""type"": ""Button"",
+                    ""id"": ""ad8fec06-38df-4591-80c9-ce45c6049302"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -203,8 +212,19 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Interact"",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""LeftMB"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""44d7fb05-e118-4d8f-9ce7-4983557d6e4e"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""RightMB"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -235,7 +255,8 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
-        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        m_Player_LeftMB = m_Player.FindAction("LeftMB", throwIfNotFound: true);
+        m_Player_RightMB = m_Player.FindAction("RightMB", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -300,7 +321,8 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Dash;
-    private readonly InputAction m_Player_Interact;
+    private readonly InputAction m_Player_LeftMB;
+    private readonly InputAction m_Player_RightMB;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -308,7 +330,8 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
-        public InputAction @Interact => m_Wrapper.m_Player_Interact;
+        public InputAction @LeftMB => m_Wrapper.m_Player_LeftMB;
+        public InputAction @RightMB => m_Wrapper.m_Player_RightMB;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -327,9 +350,12 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
             @Dash.started += instance.OnDash;
             @Dash.performed += instance.OnDash;
             @Dash.canceled += instance.OnDash;
-            @Interact.started += instance.OnInteract;
-            @Interact.performed += instance.OnInteract;
-            @Interact.canceled += instance.OnInteract;
+            @LeftMB.started += instance.OnLeftMB;
+            @LeftMB.performed += instance.OnLeftMB;
+            @LeftMB.canceled += instance.OnLeftMB;
+            @RightMB.started += instance.OnRightMB;
+            @RightMB.performed += instance.OnRightMB;
+            @RightMB.canceled += instance.OnRightMB;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -343,9 +369,12 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
             @Dash.started -= instance.OnDash;
             @Dash.performed -= instance.OnDash;
             @Dash.canceled -= instance.OnDash;
-            @Interact.started -= instance.OnInteract;
-            @Interact.performed -= instance.OnInteract;
-            @Interact.canceled -= instance.OnInteract;
+            @LeftMB.started -= instance.OnLeftMB;
+            @LeftMB.performed -= instance.OnLeftMB;
+            @LeftMB.canceled -= instance.OnLeftMB;
+            @RightMB.started -= instance.OnRightMB;
+            @RightMB.performed -= instance.OnRightMB;
+            @RightMB.canceled -= instance.OnRightMB;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -377,6 +406,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
-        void OnInteract(InputAction.CallbackContext context);
+        void OnLeftMB(InputAction.CallbackContext context);
+        void OnRightMB(InputAction.CallbackContext context);
     }
 }

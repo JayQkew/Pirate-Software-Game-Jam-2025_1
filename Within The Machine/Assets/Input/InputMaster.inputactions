@@ -33,9 +33,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Interact",
+                    "name": "LeftMB",
                     "type": "Button",
                     "id": "fabb9558-ce06-4c10-894f-f588ca73f445",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RightMB",
+                    "type": "Button",
+                    "id": "ad8fec06-38df-4591-80c9-ce45c6049302",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -181,8 +190,19 @@
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "Interact",
+                    "groups": "Keyboard and Mouse",
+                    "action": "LeftMB",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "44d7fb05-e118-4d8f-9ce7-4983557d6e4e",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "RightMB",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
