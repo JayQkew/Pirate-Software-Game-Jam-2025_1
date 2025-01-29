@@ -53,6 +53,7 @@ public class MovementScript : MonoBehaviour
     [SerializeField] private float dashDuration = 0.3f;
     [SerializeField] private float timerdashD;
     private Vector2 SaveVelocity;
+    [SerializeField] private TrailRenderer dashTrail;
     
     void Awake()
     {
@@ -70,6 +71,7 @@ public class MovementScript : MonoBehaviour
     {
         targetLayerJump = 1 << theLayer;
         rb.gravityScale = FallGravity; //Makes Jump less floaty
+        dashTrail.enabled = false;
     }
 
     // Update is called once per frame
@@ -117,6 +119,11 @@ public class MovementScript : MonoBehaviour
         if (isDashing)
         {
             CalculateDashEnd(timerdashD);
+        }
+
+        if (dashTrail.time <= 0)
+        {
+            dashTrail.enabled = false;
         }
         //----------------------------------------
         //Resets dash
@@ -182,6 +189,7 @@ public class MovementScript : MonoBehaviour
             lookingLeft = true;
         }
     }
+    
     
     // Moves the Player
     private void MovePlayer(Vector2 Direction)
@@ -261,10 +269,12 @@ public class MovementScript : MonoBehaviour
                 if (lookingLeft)
                 {
                     rb.AddForce(Vector2.left * dashSpeed, ForceMode2D.Impulse);
+                    dashTrail.enabled = true;
                 }
                 else
                 {
                     rb.AddForce(Vector2.right * dashSpeed, ForceMode2D.Impulse);
+                    dashTrail.enabled = true;
                 }
             
                 canDash = false;
@@ -285,6 +295,7 @@ public class MovementScript : MonoBehaviour
         {
             isDashing = false;
             rb.velocity = SaveVelocity;
+            dashTrail.enabled = false;
         }
     }
     
