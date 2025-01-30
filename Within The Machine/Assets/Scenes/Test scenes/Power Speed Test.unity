@@ -981,7 +981,7 @@ MonoBehaviour:
   endPosition: {fileID: 1943807360}
   startZoom: 13.58
   endZoom: 47
-  transitionSpeed: 1
+  transitionSpeed: 50
   zoomInKey: 105
   zoomOutKey: 111
   whenExteriorDisappear: 0.3
