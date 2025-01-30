@@ -6,11 +6,18 @@ public class DropItem : MonoBehaviour
 {
     [SerializeField] GameObject itemPrefab;
 
-    public void Drop(ItemSlot item)
+    public void Drop(Item item)
     {
         GameObject obj = Instantiate(itemPrefab, transform.position, Quaternion.identity);
-        ItemSlot newItem = new ItemSlot(item.itemData,item.stackValue);
+        ItemSlot newItem = new ItemSlot(item);
         obj.GetComponent<FloorItem>().SetItem(newItem);
+    }
+    
+    public void Drop(Item item, ParalaxLayers paralaxLayers)
+    {
+        GameObject obj = Instantiate(itemPrefab, transform.position, Quaternion.identity);
+        ItemSlot newItem = new ItemSlot(item);
+        obj.GetComponent<FloorItem>().SetItem(newItem,paralaxLayers);
     }
 
     public void Drop(ItemSlot item, Vector3 position)

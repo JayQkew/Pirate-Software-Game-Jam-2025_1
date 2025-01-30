@@ -135,4 +135,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explodeAtY: -3
   explodeEffect: {fileID: 215033247450441074, guid: c7fd2bb7231ee0e41a0896e003b8282d, type: 3}
-  explosionRadius: 12
+  explosionRadius: 20

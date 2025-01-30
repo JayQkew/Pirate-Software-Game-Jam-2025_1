@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,13 +8,22 @@ public class CraftingStation : MonoBehaviour
 {
     public CraftingRecipe[] recipes;
     [SerializeField] private int currentRecipe;
-    //[SerializeField] private List<Item> neededItems;
     
     [Header("Inventory")]
     [SerializeField]
     Inventory inputInventory;
     [SerializeField]
     Inventory outputInventory;
+
+    [Header("References")] 
+    [SerializeField]
+    private DropItem _dropItem;
+
+    private void Update()
+    {
+        if (CheckRecipeIngredients())
+            ProduceItem();
+    }
 
     bool CheckRecipeIngredients()
     {
@@ -48,11 +58,15 @@ public class CraftingStation : MonoBehaviour
 
         for (int i = 0; i < outputItem.amount; i++)
         {
-            outputInventory.AddItemToInventory(outputItem.item);
+            //outputInventory.AddItemToInventory(outputItem.item);
+            _dropItem.Drop(outputItem.item);
         }
 
         Debug.Log("Crafted!");
     }
 
-    
+    public bool PlaceItemInCraftingStation(ItemSlot itemSlot)
+    {
+        return inputInventory.AddItemToInventory(itemSlot);
+    }
 }
