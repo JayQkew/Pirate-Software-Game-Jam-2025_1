@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BioFuel
   m_EditorClassIdentifier: 
   name: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 4886020fac8feed4283ac51df00a6aa4, type: 3}
   description: 
   stackAmount: 1
   isFuel: 1

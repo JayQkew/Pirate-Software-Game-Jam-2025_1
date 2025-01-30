@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Metal
   m_EditorClassIdentifier: 
   name: Metal
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: cc2dcbca9d9ca8d4fa1d9c694747e71d, type: 3}
   description: From the earth, used to craft ammo
   stackAmount: 1
   isFuel: 0
