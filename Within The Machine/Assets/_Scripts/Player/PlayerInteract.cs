@@ -82,6 +82,7 @@ public class PlayerInteract : MonoBehaviour
        if (mousehitRight.collider != null && mousehitRight.collider.gameObject.GetComponent<HandID>() != null)
        {
            HandID handID = mousehitRight.collider.gameObject.GetComponent<HandID>();
+            _playerInventory.DropItem(handID.ID);
            Debug.Log(handID.ID);
        }
     }

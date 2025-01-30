@@ -26,12 +26,15 @@ public class PlayerInventory : MonoBehaviour
         // make physical item
         
         inventory.RemoveItemIndex(index);
+        UpdateHandItems();
     }
 
 
     public void PutInCraftingStation(CraftingStation craftingStation)
     {
         //
+
+        UpdateHandItems();
     }
 
     void UpdateHandItems()
