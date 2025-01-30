@@ -58,7 +58,8 @@ public class CraftingStation : MonoBehaviour
 
         for (int i = 0; i < outputItem.amount; i++)
         {
-            outputInventory.AddItemToInventory(outputItem.item);
+            //outputInventory.AddItemToInventory(outputItem.item);
+            _dropItem.Drop(outputItem.item);
         }
 
         Debug.Log("Crafted!");

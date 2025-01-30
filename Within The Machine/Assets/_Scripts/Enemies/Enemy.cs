@@ -90,6 +90,11 @@ public class Enemy : MonoBehaviour
         
         Destroy(gameObject);
     }
+
+    public float GetGroundSpeed()
+    {
+        return _paralaxLayers.speedRatios[5] * _paralaxLayers.machineSpeed * tankMoveOffset;
+    }
     
 }
 

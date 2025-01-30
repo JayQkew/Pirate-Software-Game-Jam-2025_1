@@ -838,7 +838,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &829475896
 Transform:
   m_ObjectHideFlags: 0
@@ -10811,7 +10811,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &997376250
 Transform:
   m_ObjectHideFlags: 0
@@ -16143,6 +16143,8 @@ GameObject:
   - component: {fileID: 1208473921}
   - component: {fileID: 1208473920}
   - component: {fileID: 1208473923}
+  - component: {fileID: 1208473924}
+  - component: {fileID: 1208473925}
   m_Layer: 0
   m_Name: Square
   m_TagString: Station
@@ -16274,10 +16276,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2474ac0c145d1964083d3ac5c476bcbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recipes: []
+  recipes:
+  - {fileID: 11400000, guid: e855e79160d499e41a558079f5e7d5ae, type: 2}
   currentRecipe: 0
-  inputInventory: {fileID: 0}
+  inputInventory: {fileID: 1208473924}
   outputInventory: {fileID: 0}
+  _dropItem: {fileID: 1208473925}
+--- !u!114 &1208473924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208473919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81a653389af213340bc224b4b6c7be2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemsInInventory:
+  - itemData: {fileID: 0}
+    stackValue: 0
+  - itemData: {fileID: 0}
+    stackValue: 0
+  inventorySize: 2
+  isRestricted: 1
+  onlyContains:
+  - {fileID: 11400000, guid: e4021f1fae0dcd54281a8753f8f70483, type: 2}
+  notContains: []
+--- !u!114 &1208473925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208473919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28a849b59c7733a42b8e60341f31d3b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemPrefab: {fileID: 9190916501479468387, guid: 9d65fa05b2ec0c84a98507e372baffe0, type: 3}
 --- !u!1 &1313684035
 GameObject:
   m_ObjectHideFlags: 0

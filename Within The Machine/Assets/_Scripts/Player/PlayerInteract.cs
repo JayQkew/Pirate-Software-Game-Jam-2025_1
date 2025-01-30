@@ -92,6 +92,8 @@ public class PlayerInteract : MonoBehaviour
                         HandID handID = mousehitLeft.collider.gameObject.GetComponent<HandID>();
                         Debug.Log(mousehitLeft.collider.name + " goes into: " + _craftingStation.name);
                         //Code to place station reference
+                        
+                        _playerInventory.PutInCraftingStation(handID.ID, _craftingStation);
                         return;
                     }
                 }

@@ -60,5 +60,10 @@ public class SpeedManager : MonoBehaviour
         if (currentSpeed < minVal) currentSpeed = minVal;
     }
 
+    public float GetGroundMoveSpeed()
+    {
+        return currentSpeed;
+    }
+
 
 }
