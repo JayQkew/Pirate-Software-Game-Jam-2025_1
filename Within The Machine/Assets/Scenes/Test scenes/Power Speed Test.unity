@@ -1061,12 +1061,12 @@ MonoBehaviour:
       Data3: 2092855466
       Data4: 47992057
     Path: event:/retro-gun-shot
-  damage: 2
+  damage: 1
   range: 100
   fireRate: 0.5
   shotAmmoCost: 5
   canFire: 1
-  currentAmmo: 0
+  currentAmmo: 100
   canSeeEnemy: 1
 --- !u!212 &596408595
 SpriteRenderer:
@@ -3208,7 +3208,7 @@ MonoBehaviour:
       Data3: 442633383
       Data4: 1024845514
     Path: event:/cannon-fire
-  damage: 0
+  damage: 5
   range: 0
   fireRate: 0.25
   shotAmmoCost: 0
