@@ -5,6 +5,8 @@ public class WeaponController : Weapon
     public GameObject projectilePrefab;  // The projectile prefab
     public Transform firePoint;          // The point where the projectile is fired
     public float arcDuration = 1.5f;     // Time it takes for the projectile to hit the ground
+    
+    public SpeedManager _speedManager;
 
 
     public override bool FireWeapon()
@@ -17,7 +19,7 @@ public class WeaponController : Weapon
         
         Debug.Log("Launching Morta!!");
         
-        FireProjectile(closestEnemy.transform.position);
+        FireProjectile(closestEnemy.transform.position + Vector3.left * (arcDuration * closestEnemy.GetComponent<Enemy>().GetGroundSpeed()));
 
 
         return true;
@@ -30,7 +32,8 @@ public class WeaponController : Weapon
         GameObject closestEnemy = FindClosestEnemy();
         if (closestEnemy != null)
         {
-            FireProjectile(closestEnemy.transform.position);
+            FireProjectile(closestEnemy.transform.position + Vector3.left * (arcDuration * closestEnemy.GetComponent<Enemy>().GetGroundSpeed()));
+            Debug.Log(Vector3.left * (arcDuration * closestEnemy.GetComponent<Enemy>().GetGroundSpeed()));
         }
     }
 

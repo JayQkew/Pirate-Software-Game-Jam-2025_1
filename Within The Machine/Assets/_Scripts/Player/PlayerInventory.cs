@@ -41,9 +41,14 @@ public class PlayerInventory : MonoBehaviour
     }
 
 
-    public void PutInCraftingStation(CraftingStation craftingStation)
+    public void PutInCraftingStation(int itemIndex, CraftingStation craftingStation)
     {
-        //
+        ItemSlot itemSlot = inventory.itemsInInventory[itemIndex];
+
+        if (craftingStation.PlaceItemInCraftingStation(itemSlot))
+        {
+            itemSlot.MakeEmpty();
+        }
 
         UpdateHandItems();
     }

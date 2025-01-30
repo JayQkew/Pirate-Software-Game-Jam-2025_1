@@ -7,6 +7,9 @@ using UnityEngine;
 public class FloorItem : MonoBehaviour
 {
     public where whereTag;
+    
+    public ParalaxLayers paralaxLayers;
+    public LayerMask targetLayer;
     public enum where
     {
         floor,
@@ -25,5 +28,25 @@ public class FloorItem : MonoBehaviour
     {
         this.itemSlot = itemSlot;
         GetComponent<SpriteRenderer>().sprite = itemSlot.itemData.icon;
+    }
+    
+    public void SetItem(ItemSlot itemSlot, ParalaxLayers paralaxLayers)
+    {
+        this.itemSlot = itemSlot;
+        GetComponent<SpriteRenderer>().sprite = itemSlot.itemData.icon;
+        this.paralaxLayers = paralaxLayers;
+    }
+    
+    
+
+    private void Update()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1f, targetLayer);
+
+        if (hit.collider != null)
+        {
+            // Move left
+            transform.position += Vector3.left * (paralaxLayers.speedRatios[5] * paralaxLayers.machineSpeed * 175 * Time.deltaTime);
+        }
     }
 }

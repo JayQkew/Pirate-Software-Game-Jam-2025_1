@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7133512022835177602}
   - component: {fileID: 7671694567012747713}
   - component: {fileID: 7848358439829379276}
+  - component: {fileID: -2555816510706571918}
   m_Layer: 6
   m_Name: small enemy
   m_TagString: Enemy
@@ -99,14 +100,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2ec9f8550a820a41b42a63651d71e5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1000
+  maxHealth: 2
   moveSpeed: 0
   damage: 0
   health: 0
   debuffSpeed: 0
+  dropItems:
+  - {fileID: 11400000, guid: e4021f1fae0dcd54281a8753f8f70483, type: 2}
+  - {fileID: 11400000, guid: abdbcb930991fe84cac1e62f3a7f913f, type: 2}
+  dropChances:
+  - 33.3
+  - 33.3
   _speedManager: {fileID: 0}
   _paralaxLayers: {fileID: 0}
   rb: {fileID: 0}
+  _dropItem: {fileID: -2555816510706571918}
   tankMoveOffset: 175
 --- !u!70 &7671694567012747713
 CapsuleCollider2D:
@@ -170,3 +178,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-2555816510706571918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8643664927211286633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28a849b59c7733a42b8e60341f31d3b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemPrefab: {fileID: 9190916501479468387, guid: 9d65fa05b2ec0c84a98507e372baffe0, type: 3}
