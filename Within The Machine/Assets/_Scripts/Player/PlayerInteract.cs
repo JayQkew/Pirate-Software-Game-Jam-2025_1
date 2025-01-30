@@ -22,6 +22,7 @@ public class PlayerInteract : MonoBehaviour
    [SerializeField]private RaycastHit2D[] inRangeHits;
    
    [SerializeField]private PlayerInventory _playerInventory;
+   [SerializeField]private CraftingStation _craftingStation;
    
     private void Awake()
     {
@@ -35,12 +36,13 @@ public class PlayerInteract : MonoBehaviour
     void Start()
     {
         FloorCorrectLayer = 1 << FloorlayerTarget;
-        HandLayerTarget = 2 << FloorlayerTarget;
+        HandCorrectLayer = 1 << HandLayerTarget;
     }
 
     // Update is called once per frame
     void Update()
-    { mousePosition = Input.mousePosition;
+    { 
+        mousePosition = Input.mousePosition;
        inRangeHits = Physics2D.CircleCastAll(transform.position, radius, new Vector2(1, 1), 3f, FloorCorrectLayer);
        Debug.DrawRay(transform.position, radius * new Vector3(1, 1), Color.yellow);
       // Debug.Log(inRangeHits.Length);
@@ -48,32 +50,54 @@ public class PlayerInteract : MonoBehaviour
 
     private void LeftClick()
     {
-        mousehitLeft = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, FloorCorrectLayer);
-        if (mousehitLeft.collider != null && inRangeHits.Length > 0)
+        for (int i = 1; i <= 2; i++)
         {
-            for (int i = 0; i < inRangeHits.Length; i++)
+            if (i == 1)
             {
-                if (inRangeHits[i].collider == mousehitLeft.collider)
+                int Layer = FloorCorrectLayer;
+                mousehitLeft = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Layer);
+                if (mousehitLeft.collider != null && inRangeHits.Length > 0)
                 {
-                   FloorItem floorItem = inRangeHits[i].collider.gameObject.GetComponent<FloorItem>();
-                   if (floorItem.whereTag == FloorItem.where.floor)
-                   {
-                       
-                       if (floorItem != null)
-                       {
-                           if (_playerInventory.PickupItem(floorItem.itemSlot))
-                           {
-                               Debug.Log("Pick up item");
-                               Destroy(floorItem.gameObject);
-                           }
-                        
-                       }
-                   }
-                        
-                    Debug.Log(inRangeHits[i].collider.name);
+                    for (int j = 0; j < inRangeHits.Length; j++)
+                    {
+                        if (inRangeHits[j].collider == mousehitLeft.collider)
+                        {
+                            FloorItem floorItem = inRangeHits[j].collider.gameObject.GetComponent<FloorItem>();
+                            if (floorItem.whereTag == FloorItem.where.floor)
+                            {
+                                if (floorItem != null)
+                                {
+                                    if (_playerInventory.PickupItem(floorItem.itemSlot))
+                                    {
+                                        Debug.Log("Pick up item");
+                                        Destroy(floorItem.gameObject);
+                                    }
+
+                                }
+                            }
+                            return;
+                        }
+                    }
+                }
+            }
+            else if (i == 2)
+            {
+                int Layer = HandCorrectLayer;
+                mousehitLeft = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Layer);
+                if (mousehitLeft.collider != null && mousehitLeft.collider.gameObject.GetComponent<HandID>() != null)
+                {
+                    Debug.Log(mousehitLeft.collider.name);
+                    if (_craftingStation != null)
+                    {
+                        HandID handID = mousehitLeft.collider.gameObject.GetComponent<HandID>();
+                        Debug.Log(mousehitLeft.collider.name + " goes into: " + _craftingStation.name);
+                        //Code to place station reference
+                        return;
+                    }
                 }
             }
         }
+        
     }
 
     private void RightClick()
@@ -82,9 +106,29 @@ public class PlayerInteract : MonoBehaviour
        if (mousehitRight.collider != null && mousehitRight.collider.gameObject.GetComponent<HandID>() != null)
        {
            HandID handID = mousehitRight.collider.gameObject.GetComponent<HandID>();
-            _playerInventory.DropItem(handID.ID);
-           Debug.Log(handID.ID);
+           _playerInventory.DropItem(handID.ID);
        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Station")
+        {
+            _craftingStation = other.gameObject.GetComponent<CraftingStation>();
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        _craftingStation = other.gameObject.GetComponent<CraftingStation>();
+    }
+    
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.tag == "Station")
+        {
+            _craftingStation = null;
+        }
     }
 
     private void OnEnable()
