@@ -17,7 +17,8 @@ public class Enemy : MonoBehaviour
     [Header("Drops")] public Item[] dropItems;
     public float[] dropChances;
 
-    [Header("References")] public SpeedManager _speedManager;
+    [Header("References")]
+    //public SpeedManager _speedManager;
     public ParalaxLayers _paralaxLayers;
     public Rigidbody2D rb;
     public DropItem _dropItem;
@@ -84,7 +85,7 @@ public class Enemy : MonoBehaviour
 
             if (roll < cumulative)
             {
-                _dropItem.Drop(dropItems[i]);
+                _dropItem.Drop(dropItems[i], _paralaxLayers);
             }
         }
         

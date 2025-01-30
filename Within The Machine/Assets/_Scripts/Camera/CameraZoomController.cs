@@ -11,7 +11,7 @@ public class CameraZoomController : MonoBehaviour
     public KeyCode zoomOutKey = KeyCode.O;
 
     public float whenExteriorDisappear;
-    public GameObject tankExterior;
+    public SpriteRenderer[] tankExteriors;
 
     private Camera cam;
     private bool isMoving = false; 
@@ -23,6 +23,7 @@ public class CameraZoomController : MonoBehaviour
     private void Start()
     {
         cam = GetComponent<Camera>();
+        MoveAndZoom();
     }
 
     private void Update()
@@ -73,7 +74,12 @@ public class CameraZoomController : MonoBehaviour
             endZoom, 
             currentZoomValue
         );
-        
-        tankExterior.SetActive(currentZoomValue > whenExteriorDisappear);
+
+        foreach (var sr in tankExteriors)
+        {
+            sr.enabled = currentZoomValue > whenExteriorDisappear;
+        }
+
+        //tankExterior.SetActive(currentZoomValue > whenExteriorDisappear);
     }
 }

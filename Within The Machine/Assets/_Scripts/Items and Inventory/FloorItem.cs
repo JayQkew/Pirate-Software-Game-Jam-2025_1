@@ -22,6 +22,7 @@ public class FloorItem : MonoBehaviour
         if (itemSlot.isEmpty()) return;
 
         GetComponent<SpriteRenderer>().sprite = itemSlot.itemData.icon;
+        paralaxLayers = GameObject.FindGameObjectWithTag("Paralax").GetComponent<ParalaxLayers>();
     }
 
     public void SetItem(ItemSlot itemSlot)
