@@ -86,7 +86,6 @@ public class PlayerInteract : MonoBehaviour
                 mousehitLeft = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Layer);
                 if (mousehitLeft.collider != null && mousehitLeft.collider.gameObject.GetComponent<HandID>() != null)
                 {
-                    Debug.Log(mousehitLeft.collider.name);
                     if (_craftingStation != null)
                     {
                         HandID handID = mousehitLeft.collider.gameObject.GetComponent<HandID>();

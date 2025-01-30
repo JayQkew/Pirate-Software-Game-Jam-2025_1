@@ -27,7 +27,7 @@ public class CameraZoomController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(zoomInKey))
+        if (Input.mouseScrollDelta.y > 0)
         {
             // Start moving towards the start position and max zoom
             isMoving = true;
@@ -35,7 +35,7 @@ public class CameraZoomController : MonoBehaviour
             currentZoomValue -= Time.deltaTime * transitionSpeed;
             //targetZoom = maxZoom;
         }
-        else if (Input.GetKey(zoomOutKey))
+        else if (Input.mouseScrollDelta.y < 0)
         {
             // Start moving towards the end position and min zoom
             isMoving = true;
