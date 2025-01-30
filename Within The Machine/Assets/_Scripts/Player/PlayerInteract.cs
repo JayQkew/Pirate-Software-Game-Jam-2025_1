@@ -89,6 +89,7 @@ public class PlayerInteract : MonoBehaviour
                     Debug.Log(mousehitLeft.collider.name);
                     if (_craftingStation != null)
                     {
+                        HandID handID = mousehitLeft.collider.gameObject.GetComponent<HandID>();
                         Debug.Log(mousehitLeft.collider.name + " goes into: " + _craftingStation.name);
                         //Code to place station reference
                         return;
@@ -106,7 +107,6 @@ public class PlayerInteract : MonoBehaviour
        {
            HandID handID = mousehitRight.collider.gameObject.GetComponent<HandID>();
            _playerInventory.DropItem(handID.ID);
-           Debug.Log(handID.ID);
        }
     }
 
