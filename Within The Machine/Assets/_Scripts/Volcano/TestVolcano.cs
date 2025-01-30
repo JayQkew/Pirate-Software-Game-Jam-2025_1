@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class TestVolcano : MonoBehaviour
 {
     [SerializeField]
-    private bool InValcano = false;
+    private bool InVolcano = false;
     [SerializeField]
     private VolcanoBehavior Volcano;
     
@@ -18,10 +19,15 @@ public class TestVolcano : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (InValcano)
+        if (InVolcano)
         {
             Volcano.VolcanoProcess(gameObject);
-            InValcano = false;
+            InVolcano = false;
         }
+    }
+
+    public void PutInVolcano()
+    {
+        InVolcano = true;
     }
 }

@@ -27,10 +27,10 @@ public class ItemSlot
     public int stackValue;
 
 
-    public ItemSlot(Item item)
+    public ItemSlot(Item item, int stackValue = 1)
     {
         itemData = item;
-        stackValue = 1;
+        this.stackValue = stackValue;
     }
 
     public void AddToStack(int amount = 1)

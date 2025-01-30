@@ -9,12 +9,14 @@ public class DropItem : MonoBehaviour
     public void Drop(ItemSlot item)
     {
         GameObject obj = Instantiate(itemPrefab, transform.position, Quaternion.identity);
-        obj.GetComponent<FloorItem>().itemSlot = item;
+        ItemSlot newItem = new ItemSlot(item.itemData,item.stackValue);
+        obj.GetComponent<FloorItem>().SetItem(newItem);
     }
 
     public void Drop(ItemSlot item, Vector3 position)
     {
         GameObject obj = Instantiate(itemPrefab, position, Quaternion.identity);
-        obj.GetComponent<FloorItem>().itemSlot = item;
+        ItemSlot newItem = new ItemSlot(item.itemData,item.stackValue);
+        obj.GetComponent<FloorItem>().SetItem(newItem);
     }
 }
