@@ -139,6 +139,7 @@ GameObject:
   - component: {fileID: 279795437}
   - component: {fileID: 279795439}
   - component: {fileID: 279795438}
+  - component: {fileID: 279795440}
   m_Layer: 9
   m_Name: Just a Little guy
   m_TagString: Player
@@ -409,6 +410,20 @@ MonoBehaviour:
   inventory: {fileID: 279795438}
   leftItem: {fileID: 829475895}
   rightItem: {fileID: 997376249}
+  _dropItem: {fileID: 0}
+--- !u!114 &279795440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 279795430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28a849b59c7733a42b8e60341f31d3b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemPrefab: {fileID: 0}
 --- !u!4 &295518989 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5358346248437417441, guid: c3100175ad45a4c4294ea8ea1da5ec1d, type: 3}

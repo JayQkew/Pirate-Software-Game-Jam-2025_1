@@ -8,6 +8,8 @@ public class PlayerInventory : MonoBehaviour
 
     public GameObject leftItem;
     public GameObject rightItem;
+    
+    public DropItem _dropItem;
 
     public bool PickupItem(ItemSlot item)
     {
@@ -24,6 +26,15 @@ public class PlayerInventory : MonoBehaviour
     {
         // drop item
         // make physical item
+
+        if (index == 0)
+        {
+            _dropItem.Drop(inventory.itemsInInventory[index],leftItem.transform.position);
+        }
+        else
+        {
+            _dropItem.Drop(inventory.itemsInInventory[index],rightItem.transform.position);
+        }
         
         inventory.RemoveItemIndex(index);
         UpdateHandItems();
