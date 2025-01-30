@@ -6,6 +6,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.PlayerLoop;
 using UnityEngine.Serialization;
+using FMODUnity;
+using UnityEngine.EventSystems;
 
 
 public class MovementScript : MonoBehaviour
@@ -54,6 +56,12 @@ public class MovementScript : MonoBehaviour
     [SerializeField] private float timerdashD;
     private Vector2 SaveVelocity;
     [SerializeField] private TrailRenderer dashTrail;
+    
+    [Header("Sound Effects")]
+    [SerializeField] protected FMODUnity.EventReference WalkingSound;
+
+    [SerializeField] private bool canPlaySound = false;
+    
     
     void Awake()
     {
@@ -142,6 +150,7 @@ public class MovementScript : MonoBehaviour
             !isDashing)
         {
             MovePlayer(controls.Player.Movement.ReadValue<Vector2>());
+            
         }
         
         else if (closeToLadder &&
@@ -197,6 +206,7 @@ public class MovementScript : MonoBehaviour
         if (Direction.x != 0 && (!closeToLadder || !LadderOn)) //Left to right movement
         {
             rb.velocity = new Vector2(Direction.x * movementSpeed * Time.fixedDeltaTime, rb.velocity.y);
+            PlayWalkingSound();
             downSpeed = climbingSpeed;
             slideStarted = false;
             if (isGrounded)
@@ -233,6 +243,15 @@ public class MovementScript : MonoBehaviour
                     rb.velocity = new Vector2(Direction.x * movementSpeed * Time.fixedDeltaTime, Direction.y * downSpeed * Time.fixedDeltaTime);
             }
         }
+    }
+
+    private void PlayWalkingSound()
+    {
+        if (canPlaySound == true)
+        {
+            FMODUnity.RuntimeManager.PlayOneShot(WalkingSound);
+        }
+       
     }
 
    // Delay before the slide starts
