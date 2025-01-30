@@ -44,6 +44,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Mech
+  - name: Mech Background
+    uniqueID: 1307655925
+    locked: 0
+  - name: Mech Midground
     uniqueID: 3974913329
+    locked: 0
+  - name: Player
+    uniqueID: 1808312453
+    locked: 0
+  - name: Mech Foreground
+    uniqueID: 407105969
     locked: 0
