@@ -28,6 +28,8 @@ public class VolcanoBehavior : MonoBehaviour
 
     private void PutInValcano(GameObject item)
     {
+        Rigidbody2D rb = item.GetComponent<Rigidbody2D>();
+        rb.velocity = Vector2.zero;
         Collider2D collider2D = item.GetComponent<Collider2D>();
         collider2D.enabled = false;
         SpriteRenderer sr = item.GetComponent<SpriteRenderer>();
