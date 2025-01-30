@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FloorItem : MonoBehaviour
 {
+    public where whereTag;
     public enum where
     {
         floor,
