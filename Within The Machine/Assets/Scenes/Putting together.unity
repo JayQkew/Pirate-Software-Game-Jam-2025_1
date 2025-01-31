@@ -1854,6 +1854,26 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0.04615301
       objectReference: {fileID: 0}
+    - target: {fileID: 8819959609624007000, guid: 5813a52ed4425bc41a6e843bb1ced19a, type: 3}
+      propertyPath: SelectRollingSound.Path
+      value: event:/rolling
+      objectReference: {fileID: 0}
+    - target: {fileID: 8819959609624007000, guid: 5813a52ed4425bc41a6e843bb1ced19a, type: 3}
+      propertyPath: SelectRollingSound.Guid.Data1
+      value: -1322033197
+      objectReference: {fileID: 0}
+    - target: {fileID: 8819959609624007000, guid: 5813a52ed4425bc41a6e843bb1ced19a, type: 3}
+      propertyPath: SelectRollingSound.Guid.Data2
+      value: 1322566165
+      objectReference: {fileID: 0}
+    - target: {fileID: 8819959609624007000, guid: 5813a52ed4425bc41a6e843bb1ced19a, type: 3}
+      propertyPath: SelectRollingSound.Guid.Data3
+      value: 108132482
+      objectReference: {fileID: 0}
+    - target: {fileID: 8819959609624007000, guid: 5813a52ed4425bc41a6e843bb1ced19a, type: 3}
+      propertyPath: SelectRollingSound.Guid.Data4
+      value: 465968043
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
