@@ -3883,6 +3883,7 @@ MonoBehaviour:
   paralax: {fileID: 1037493258}
   visualSpeedMultiple: 0.2
   _furnace: {fileID: 1282845401}
+  SpeedSet: 0
 --- !u!4 &2128770869
 Transform:
   m_ObjectHideFlags: 0
@@ -4184,6 +4185,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 720744657592115184, guid: 7b9627e968b3350478f0475b688e01f8, type: 3}
+      propertyPath: m_Points.Array.data[0].x
+      value: -6.914356
+      objectReference: {fileID: 0}
+    - target: {fileID: 720744657592115184, guid: 7b9627e968b3350478f0475b688e01f8, type: 3}
+      propertyPath: m_Points.Array.data[0].y
+      value: 1.486886
+      objectReference: {fileID: 0}
     - target: {fileID: 3736352815151262950, guid: 7b9627e968b3350478f0475b688e01f8, type: 3}
       propertyPath: m_Name
       value: Mech GUI
@@ -4191,6 +4200,14 @@ PrefabInstance:
     - target: {fileID: 5105562026471320890, guid: 7b9627e968b3350478f0475b688e01f8, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5118140464733048869, guid: 7b9627e968b3350478f0475b688e01f8, type: 3}
+      propertyPath: m_Points.Array.data[18].x
+      value: 8.9796295
+      objectReference: {fileID: 0}
+    - target: {fileID: 5118140464733048869, guid: 7b9627e968b3350478f0475b688e01f8, type: 3}
+      propertyPath: m_Points.Array.data[18].y
+      value: 9.729726
       objectReference: {fileID: 0}
     - target: {fileID: 5572659221024010272, guid: 7b9627e968b3350478f0475b688e01f8, type: 3}
       propertyPath: m_Enabled
