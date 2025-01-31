@@ -78,7 +78,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &678882210708337089
 Transform:
   m_ObjectHideFlags: 0
@@ -593,8 +593,8 @@ SortingGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1671626028783620412}
   m_Enabled: 1
-  m_SortingLayerID: 407105969
-  m_SortingLayer: 4
+  m_SortingLayerID: 1307655925
+  m_SortingLayer: 1
   m_SortingOrder: -1
   m_SortAtRoot: 0
 --- !u!1 &2047628283830071439
@@ -1113,7 +1113,6 @@ Transform:
   - {fileID: 729566151477990692}
   - {fileID: 5582482170102026047}
   - {fileID: 7791562208317851072}
-  - {fileID: 2916033440969871804}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6057869343646944874
@@ -1844,7 +1843,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &914670763876680700
 Transform:
   m_ObjectHideFlags: 0
@@ -2486,7 +2485,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7651778314777414303
 Transform:
   m_ObjectHideFlags: 0
@@ -2894,7 +2893,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7723154156991755206
 Transform:
   m_ObjectHideFlags: 0
@@ -3323,7 +3322,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3093307556690587365
 Transform:
   m_ObjectHideFlags: 0
@@ -4263,6 +4262,7 @@ Transform:
   - {fileID: 5751942772788725244}
   - {fileID: 1255387119730175113}
   - {fileID: 7910745986221426382}
+  - {fileID: 2916033440969871804}
   m_Father: {fileID: 5886626978115694185}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &374281417170095849
@@ -4961,7 +4961,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 5927702836080092497}
+    m_TransformParent: {fileID: 6612814353897647041}
     m_Modifications:
     - target: {fileID: 6401742415891485946, guid: 76cf2d3047333c4458c4209c28bbe279, type: 3}
       propertyPath: m_Name
