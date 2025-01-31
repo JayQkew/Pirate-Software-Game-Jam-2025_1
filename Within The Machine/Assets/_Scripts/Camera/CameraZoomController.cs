@@ -24,6 +24,10 @@ public class CameraZoomController : MonoBehaviour
     {
         cam = GetComponent<Camera>();
         MoveAndZoom();
+        foreach (var tank in tankExteriors)
+        {
+            tank.gameObject.SetActive(true);
+        }
     }
 
     private void Update()
