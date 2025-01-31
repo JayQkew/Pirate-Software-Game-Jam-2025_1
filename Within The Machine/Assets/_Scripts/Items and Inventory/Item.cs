@@ -17,6 +17,10 @@ public class Item : ScriptableObject
     [Header("Ammo")]
     public bool isAmmo;
     public float ammoAmount;
+    
+    [Header("Repair")]
+    public bool isRepair;
+    public float repairAmount;
 }
 
 
