@@ -936,7 +936,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e9a5daa7756e624a863fef3751e1336, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smallEnemyPrefab: {fileID: 8643664927211286633, guid: 3711bc45f19f95f4ca792f87ac890792, type: 3}
+  smallEnemyPrefab: {fileID: 2836991270132568872, guid: fb4689f88403d75409dfc1c643cb8648, type: 3}
   bigEnemyPrefab: {fileID: 829046382928686004, guid: a0c1ea6b0452bdb448025c26bd7e1344, type: 3}
   spawnPoint: {fileID: 2069865820}
   initialSpawnRate: 8

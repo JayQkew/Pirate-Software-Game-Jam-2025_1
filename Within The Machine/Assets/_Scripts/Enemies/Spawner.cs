@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
@@ -44,21 +46,35 @@ public class Spawner : MonoBehaviour
         {
             // Spawn a single big enemy (less frequent)
             SpawnEnemy(bigEnemyPrefab);
+            Debug.Log("Spawn here "+ spawnPoint.position);
         }
         else
         {
+            List<GameObject> enemies = new List<GameObject>();
             // Spawn a group (small enemies with a chance for one big enemy)
             int groupSize = Random.Range(2, 5); // Randomize group size
             for (int i = 0; i < groupSize; i++)
             {
-                SpawnEnemy(smallEnemyPrefab);
+                enemies.Add(smallEnemyPrefab);
             }
 
             // Random chance to include a big enemy in the group
             if (Random.value < 0.3f) // 30% chance for a big enemy in the group
             {
-                SpawnEnemy(bigEnemyPrefab);
+                enemies.Add(bigEnemyPrefab);
             }
+
+            StartCoroutine(SpawnGroup(enemies));
+        }
+    }
+
+
+    IEnumerator SpawnGroup(List<GameObject> enemies)
+    {
+        foreach (var enemy in enemies)
+        {
+            SpawnEnemy(enemy);
+            yield return new WaitForSeconds(.3f);
         }
     }
 

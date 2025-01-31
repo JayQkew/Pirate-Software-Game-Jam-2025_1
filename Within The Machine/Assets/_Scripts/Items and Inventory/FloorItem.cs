@@ -38,6 +38,14 @@ public class FloorItem : MonoBehaviour
         this.paralaxLayers = paralaxLayers;
     }
     
+    public void SetItem(ItemSlot itemSlot, ParalaxLayers paralaxLayers, Transform position)
+    {
+        this.itemSlot = itemSlot;
+        GetComponent<SpriteRenderer>().sprite = itemSlot.itemData.icon;
+        this.paralaxLayers = paralaxLayers;
+        transform.position = position.position;
+    }
+    
     
 
     private void Update()
@@ -47,7 +55,7 @@ public class FloorItem : MonoBehaviour
         if (hit.collider != null)
         {
             // Move left
-            transform.position += Vector3.left * (paralaxLayers.speedRatios[5] * paralaxLayers.machineSpeed * 175 * Time.deltaTime);
+            transform.position += Vector3.left * (paralaxLayers.speedRatios[5] * paralaxLayers.machineSpeed * 175 * 1.5f * Time.deltaTime);
         }
     }
 }

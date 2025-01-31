@@ -26,4 +26,5 @@ public class DropItem : MonoBehaviour
         ItemSlot newItem = new ItemSlot(item.itemData,item.stackValue);
         obj.GetComponent<FloorItem>().SetItem(newItem);
     }
+    
 }

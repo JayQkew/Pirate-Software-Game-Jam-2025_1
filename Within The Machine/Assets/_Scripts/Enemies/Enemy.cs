@@ -31,7 +31,7 @@ public class Enemy : MonoBehaviour
         health = maxHealth;
         //currentSpeed = speed;
         rb = GetComponent<Rigidbody2D>();
-        originalColor = GetComponent<SpriteRenderer>().color;
+        originalColor = Color.white;
         _paralaxLayers = GameObject.FindGameObjectWithTag("Paralax").GetComponent<ParalaxLayers>();
     }
 
@@ -60,11 +60,17 @@ public class Enemy : MonoBehaviour
 
     private IEnumerator DamageEffect()
     {
-        gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+        foreach (SpriteRenderer sr in transform.GetComponentsInChildren<SpriteRenderer>())
+        {
+            sr.color = Color.red;
+        }
         debuffSpeed = moveSpeed * .5f;
         yield return new WaitForSeconds(.1f);
         debuffSpeed = 0;
-        gameObject.GetComponent<SpriteRenderer>().color = originalColor;
+        foreach (SpriteRenderer sr in transform.GetComponentsInChildren<SpriteRenderer>())
+        {
+            sr.color = Color.white;
+        }
     }
 
     void Die()
