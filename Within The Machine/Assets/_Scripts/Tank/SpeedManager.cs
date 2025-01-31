@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,9 +17,13 @@ public class SpeedManager : MonoBehaviour
 
     [Header("Furnace")]
     public Furnace _furnace;
-    
-    
 
+    public int SpeedSet;
+
+    private void Start()
+    {
+        ChangeSpeed();
+    }
 
     private void Update()
     {
@@ -67,5 +72,24 @@ public class SpeedManager : MonoBehaviour
         return currentSpeed;
     }
 
+
+    public void ChangeSpeed()
+    {
+        SpeedSet++;
+
+        if (SpeedSet > 3) SpeedSet = 0;
+        
+        _furnace.animator.SetInteger("Fire", SpeedSet);
+
+        StartCoroutine(ChangeFire());
+    }
+
+    IEnumerator ChangeFire()
+    {
+        yield return new WaitForSeconds(2f);
+        ChangeSpeed();
+    }
+    
+    
 
 }
