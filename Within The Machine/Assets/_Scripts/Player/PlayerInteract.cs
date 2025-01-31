@@ -23,6 +23,8 @@ public class PlayerInteract : MonoBehaviour
    
    [SerializeField]private PlayerInventory _playerInventory;
    [SerializeField]private CraftingStation _craftingStation;
+   [SerializeField] private Weapon _weapon;
+   [SerializeField] private Furnace _furnace;
    
     private void Awake()
     {
@@ -86,15 +88,27 @@ public class PlayerInteract : MonoBehaviour
                 mousehitLeft = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Layer);
                 if (mousehitLeft.collider != null && mousehitLeft.collider.gameObject.GetComponent<HandID>() != null)
                 {
+                    HandID handID = mousehitLeft.collider.gameObject.GetComponent<HandID>();
                     if (_craftingStation != null)
                     {
-                        HandID handID = mousehitLeft.collider.gameObject.GetComponent<HandID>();
-                        Debug.Log(mousehitLeft.collider.name + " goes into: " + _craftingStation.name);
-                        //Code to place station reference
-                        
                         _playerInventory.PutInCraftingStation(handID.ID, _craftingStation);
                         return;
                     }
+                    
+                    else if (_furnace != null)
+                    {
+                        Debug.Log("Furnace");
+                        //Furnace code
+                        return;
+                    }
+                    
+                    else if (_weapon != null)
+                    {
+                        Debug.Log("Weapon");
+                        //weapon code
+                        return;
+                    }
+                    
                 }
             }
         }
@@ -116,12 +130,47 @@ public class PlayerInteract : MonoBehaviour
         if (other.tag == "Station")
         {
             _craftingStation = other.gameObject.GetComponent<CraftingStation>();
+            _furnace = null;
+            _weapon = null;
+        }
+
+        if (other.tag == "Furnace")
+        {
+            _furnace = other.gameObject.GetComponent<Furnace>();
+            _craftingStation = null;
+            _weapon = null;
+        }
+
+        if (other.tag == "Weapon")
+        {
+            _weapon = other.gameObject.GetComponent<Weapon>();
+            _craftingStation = null;
+            _furnace = null;
         }
     }
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        _craftingStation = other.gameObject.GetComponent<CraftingStation>();
+        if (other.tag == "Station")
+        {
+            _craftingStation = other.gameObject.GetComponent<CraftingStation>();
+            _furnace = null;
+            _weapon = null;
+        }
+
+        if (other.tag == "Furnace")
+        {
+            _furnace = other.gameObject.GetComponent<Furnace>();
+            _craftingStation = null;
+            _weapon = null;
+        }
+
+        if (other.tag == "Weapon")
+        {
+            _weapon = other.gameObject.GetComponent<Weapon>();
+            _craftingStation = null;
+            _furnace = null;
+        }
     }
     
     private void OnTriggerExit2D(Collider2D other)
@@ -129,6 +178,21 @@ public class PlayerInteract : MonoBehaviour
         if (other.tag == "Station")
         {
             _craftingStation = null;
+            _craftingStation = null;
+            _furnace = null;
+        }
+        if (other.tag == "Furnace")
+        {
+            _craftingStation = null;
+            _craftingStation = null;
+            _furnace = null;
+        }
+
+        if (other.tag == "Weapon")
+        {
+            _craftingStation = null;
+            _weapon = null;
+            _furnace = null;
         }
     }
 

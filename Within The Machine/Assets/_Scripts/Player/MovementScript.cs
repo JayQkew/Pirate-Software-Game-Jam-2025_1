@@ -132,6 +132,7 @@ public class MovementScript : MonoBehaviour
         //Checks if the Dash is done
         if (isDashing)
         {
+            rb.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
             CalculateDashEnd(timerdashD);
         }
 
@@ -328,6 +329,7 @@ public class MovementScript : MonoBehaviour
         if (Time.time - timer > dashDuration)
         {
             isDashing = false;
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
             rb.velocity = SaveVelocity;
             dashTrail.enabled = false;
         }
