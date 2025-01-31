@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Compact
   m_EditorClassIdentifier: 
   name: Compact
-  icon: {fileID: 21300000, guid: a2c689a24d6c8d34783aadcc1ba51def, type: 3}
+  icon: {fileID: 21300000, guid: 213416dd67e6aaf4291c2f3565c7e07a, type: 3}
   description: 
   stackAmount: 1
   isFuel: 1

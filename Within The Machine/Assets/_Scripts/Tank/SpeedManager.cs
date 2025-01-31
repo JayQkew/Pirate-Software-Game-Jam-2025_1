@@ -16,6 +16,8 @@ public class SpeedManager : MonoBehaviour
 
     [Header("Furnace")]
     public Furnace _furnace;
+    
+    
 
 
     private void Update()

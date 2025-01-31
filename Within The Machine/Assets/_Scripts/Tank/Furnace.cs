@@ -22,6 +22,8 @@ public class Furnace : MonoBehaviour
     [Header("Current Fuel")]
     public Item currentFuel;
     public float fuelUsage;
+    
+    [SerializeField] Animator animator;
 
 
     private void Update()
