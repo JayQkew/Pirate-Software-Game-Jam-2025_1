@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.PlayerLoop;
 using UnityEngine.Serialization;
 using FMODUnity;
+using FMOD.Studio;
 using UnityEngine.EventSystems;
 
 
@@ -58,9 +59,11 @@ public class MovementScript : MonoBehaviour
     [SerializeField] private TrailRenderer dashTrail;
     
     [Header("Sound Effects")]
-    [SerializeField] protected FMODUnity.EventReference WalkingSound;
-
     [SerializeField] private bool canPlaySound = false;
+
+    [SerializeField] protected FMODUnity.EventReference SelectRollingSound;
+    [SerializeField] private FMOD.Studio.EventInstance RollingSound;
+    
     
     
     void Awake()
@@ -80,6 +83,9 @@ public class MovementScript : MonoBehaviour
         targetLayerJump = 1 << theLayer;
         rb.gravityScale = FallGravity; //Makes Jump less floaty
         dashTrail.enabled = false;
+        RollingSound = FMODUnity.RuntimeManager.CreateInstance(SelectRollingSound);
+        RollingSound.start();
+        RollingSound.setPaused(true);
     }
 
     // Update is called once per frame
@@ -140,6 +146,7 @@ public class MovementScript : MonoBehaviour
             ResetDashCooldown(timerdashD);
         }
         //----------------------------------------------
+        
     }
 
     void FixedUpdate()
@@ -158,16 +165,19 @@ public class MovementScript : MonoBehaviour
         {
             rb.velocity = Vector2.zero;
             PC_Script.isRunning = false;
+            RollingSound.setPaused(true);
         }
         
         else if (InputVector == Vector2.zero)
         {
             PC_Script.isRunning = false;  
+            RollingSound.setPaused(true);
         }
 
         if (InputVector != Vector2.zero && !isGrounded)
         {
             PC_Script.isRunning = false;
+            RollingSound.setPaused(true);
         }
         //----------------------------------------------------------------------
         
@@ -206,18 +216,19 @@ public class MovementScript : MonoBehaviour
         if (Direction.x != 0 && (!closeToLadder || !LadderOn)) //Left to right movement
         {
             rb.velocity = new Vector2(Direction.x * movementSpeed * Time.fixedDeltaTime, rb.velocity.y);
-            PlayWalkingSound();
             downSpeed = climbingSpeed;
             slideStarted = false;
             if (isGrounded)
             {
                 PC_Script.isRunning = true;
+                RollingSound.setPaused(false);
             }
             else
             {
                 PC_Script.isRunning = false;
+                RollingSound.setPaused(true);
             }
-            
+           
         }
         
         else if (LadderOn &&
@@ -247,10 +258,6 @@ public class MovementScript : MonoBehaviour
 
     private void PlayWalkingSound()
     {
-        if (canPlaySound == true)
-        {
-            FMODUnity.RuntimeManager.PlayOneShot(WalkingSound);
-        }
        
     }
 
