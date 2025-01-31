@@ -3088,45 +3088,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1726232867}
     m_Modifications:
-    - target: {fileID: 425617108195920967, guid: 7b9627e968b3350478f0475b688e01f8, type: 3}
-      propertyPath: m_SortingOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 624580914244473458, guid: 7b9627e968b3350478f0475b688e01f8, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1807779543903075579, guid: 7b9627e968b3350478f0475b688e01f8, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
-    - target: {fileID: 2646474064028538988, guid: 7b9627e968b3350478f0475b688e01f8, type: 3}
-      propertyPath: m_VerticalAlignment
-      value: 512
-      objectReference: {fileID: 0}
-    - target: {fileID: 2646474064028538988, guid: 7b9627e968b3350478f0475b688e01f8, type: 3}
-      propertyPath: m_HorizontalAlignment
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3223685987097581799, guid: 7b9627e968b3350478f0475b688e01f8, type: 3}
-      propertyPath: m_VerticalAlignment
-      value: 512
-      objectReference: {fileID: 0}
-    - target: {fileID: 3223685987097581799, guid: 7b9627e968b3350478f0475b688e01f8, type: 3}
-      propertyPath: m_HorizontalAlignment
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 3736352815151262950, guid: 7b9627e968b3350478f0475b688e01f8, type: 3}
       propertyPath: m_Name
       value: Mech GUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 5105562026471320890, guid: 7b9627e968b3350478f0475b688e01f8, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5572659221024010272, guid: 7b9627e968b3350478f0475b688e01f8, type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5927702836080092497, guid: 7b9627e968b3350478f0475b688e01f8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3168,26 +3136,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6448371211609887937, guid: 7b9627e968b3350478f0475b688e01f8, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6927865795122534949, guid: 7b9627e968b3350478f0475b688e01f8, type: 3}
-      propertyPath: m_SortingOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7068644956355594714, guid: 7b9627e968b3350478f0475b688e01f8, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7805596258355817117, guid: 7b9627e968b3350478f0475b688e01f8, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
-    - target: {fileID: 8041895854538469336, guid: 7b9627e968b3350478f0475b688e01f8, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
