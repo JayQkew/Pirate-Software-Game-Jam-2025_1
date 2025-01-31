@@ -49,7 +49,11 @@ public class VolcanoBehavior : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        SpriteRenderer sr = other.gameObject.GetComponent<SpriteRenderer>();
-        sr.sortingOrder = SortingLayer;
+       if (other.gameObject.tag == "FloorTag")
+       {
+           SpriteRenderer sr = other.gameObject.GetComponent<SpriteRenderer>();
+           sr.sortingOrder = SortingLayer;
+       }
+        
     }
 }

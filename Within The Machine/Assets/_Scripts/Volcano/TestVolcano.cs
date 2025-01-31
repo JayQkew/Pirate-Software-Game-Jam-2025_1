@@ -7,8 +7,11 @@ public class TestVolcano : MonoBehaviour
 {
     [SerializeField]
     private bool InVolcano = false;
-    [SerializeField]
-    private VolcanoBehavior Volcano;
+    public VolcanoBehavior Volcano;
+    [SerializeField] private bool isFloating = false;
+    public Transform Target;
+    public float speed;
+   
     
     // Start is called before the first frame update
     void Start()
@@ -19,15 +22,22 @@ public class TestVolcano : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (InVolcano)
+        if (isFloating)
         {
-            Volcano.VolcanoProcess(gameObject);
-            InVolcano = false;
+            transform.position = Vector2.Lerp(transform.position, Target.position, speed * Time.deltaTime);
         }
     }
 
     public void PutInVolcano()
     {
-        InVolcano = true;
+        isFloating = false;
+        Volcano.VolcanoProcess(gameObject);
+        InVolcano = false;
+    }
+
+
+    public void GetSuckedUp()
+    {
+        isFloating = true;
     }
 }

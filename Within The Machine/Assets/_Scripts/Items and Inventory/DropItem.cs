@@ -5,7 +5,7 @@ using UnityEngine;
 public class DropItem : MonoBehaviour
 {
     [SerializeField] GameObject itemPrefab;
-
+   
     public void Drop(Item item)
     {
         GameObject obj = Instantiate(itemPrefab, transform.position, Quaternion.identity);
