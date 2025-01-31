@@ -3096,6 +3096,26 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1807779543903075579, guid: 7b9627e968b3350478f0475b688e01f8, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 519420031}
+    - target: {fileID: 2646474064028538988, guid: 7b9627e968b3350478f0475b688e01f8, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646474064028538988, guid: 7b9627e968b3350478f0475b688e01f8, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3223685987097581799, guid: 7b9627e968b3350478f0475b688e01f8, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 3223685987097581799, guid: 7b9627e968b3350478f0475b688e01f8, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3736352815151262950, guid: 7b9627e968b3350478f0475b688e01f8, type: 3}
       propertyPath: m_Name
       value: Mech GUI
@@ -3160,6 +3180,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7805596258355817117, guid: 7b9627e968b3350478f0475b688e01f8, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 519420031}
     - target: {fileID: 8041895854538469336, guid: 7b9627e968b3350478f0475b688e01f8, type: 3}
       propertyPath: m_IsActive
       value: 1
