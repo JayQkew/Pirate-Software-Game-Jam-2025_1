@@ -18,11 +18,15 @@ public class CraftingStation : MonoBehaviour
     [Header("References")] 
     [SerializeField]
     private DropItem _dropItem;
+    
+    [SerializeField] SpriteRenderer[] _renderers;
 
     private void Update()
     {
         if (CheckRecipeIngredients())
             ProduceItem();
+        
+        IndicateRecipe();
     }
 
     bool CheckRecipeIngredients()
@@ -68,5 +72,21 @@ public class CraftingStation : MonoBehaviour
     public bool PlaceItemInCraftingStation(ItemSlot itemSlot)
     {
         return inputInventory.AddItemToInventory(itemSlot);
+    }
+
+    void IndicateRecipe()
+    {
+        for (int i = 0; i < _renderers.Length; i++)
+        {
+            if (i >= recipes[0].inputItems.Count) break; 
+            if (inputInventory.CountItem(recipes[0].inputItems[i].item) > 0)
+            {
+                _renderers[i].color = Color.green;
+            }
+            else
+            {
+                _renderers[i].color = Color.red;
+            }
+        }
     }
 }
