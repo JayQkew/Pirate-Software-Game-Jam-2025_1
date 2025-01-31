@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - Paralax
   - Station
+  - Volcano
+  - FloorTag
   layers:
   - Default
   - TransparentFX
