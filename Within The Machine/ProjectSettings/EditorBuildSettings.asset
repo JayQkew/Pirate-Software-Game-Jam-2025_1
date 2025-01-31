@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Health.unity
     guid: c9abd0ef74d6dfd40a543d0251fc7793
+  - enabled: 1
+    path: Assets/Scenes/end.unity
+    guid: cc5481adf72afdf44a6ded92ee1690bd
   m_configObjects: {}

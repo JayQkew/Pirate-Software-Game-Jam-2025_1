@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TankHealth : MonoBehaviour
 {
@@ -44,7 +45,7 @@ public class TankHealth : MonoBehaviour
 
     void Die()
     {
-        
+        SceneManager.LoadScene(1);
         Debug.Log("LOSE THE GAME");
     }
 
