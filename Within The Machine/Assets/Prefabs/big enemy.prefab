@@ -107,7 +107,7 @@ MonoBehaviour:
   health: 0
   debuffSpeed: 0
   dropItems:
-  - {fileID: 11400000, guid: abdbcb930991fe84cac1e62f3a7f913f, type: 2}
+  - {fileID: 11400000, guid: e4021f1fae0dcd54281a8753f8f70483, type: 2}
   dropChances:
   - 100
   _paralaxLayers: {fileID: 0}

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using FMODUnity;
+using TMPro;
 
 public class Weapon : MonoBehaviour
 {
@@ -27,11 +28,14 @@ public class Weapon : MonoBehaviour
     [SerializeField] protected EventReference fireSound;
 
     [SerializeField] private GameObject visualEffect;
+    [SerializeField] private TMP_Text ammoText;
 
     
 
     public void Update()
     {
+        ammoText.text = $"{inputInventory.CountItems()}/{inputInventory.inventorySize}";
+        inputInventory.CountItems();
         if (!canSeeEnemy) return;
         
         if (!canFire || !CheckAmmo()) return;

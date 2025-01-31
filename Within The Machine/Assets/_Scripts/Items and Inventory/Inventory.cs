@@ -219,4 +219,15 @@ public class Inventory : MonoBehaviour
     {
         itemsInInventory[index].MakeEmpty();
     }
+
+    public int CountItems()
+    {
+        int count = 0;
+        foreach (var item in itemsInInventory)
+        {
+            if (!item.isEmpty())
+                count++;
+        }
+        return count;
+    }
 }

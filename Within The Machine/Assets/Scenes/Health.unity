@@ -1406,7 +1406,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPosition: {fileID: 2060045920}
   endPosition: {fileID: 892809446}
-  startZoom: 9.7
+  startZoom: 10
   endZoom: 47.07
   transitionSpeed: 10
   zoomInKey: 105
@@ -1740,6 +1740,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
+  tankStatusText: {fileID: 1161277603}
 --- !u!1 &722388342
 GameObject:
   m_ObjectHideFlags: 0
@@ -1903,6 +1904,7 @@ MonoBehaviour:
       Data4: 1024845514
     Path: event:/cannon-fire
   visualEffect: {fileID: 383723248}
+  ammoText: {fileID: 1824978033}
   projectilePrefab: {fileID: 3669380309743426767, guid: c000cf95a50900a49851c5f8b25c08a5, type: 3}
   firePoint: {fileID: 805940443}
   arcDuration: 5
@@ -2021,6 +2023,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 6.89, y: 4.08}
   m_EdgeRadius: 0
+--- !u!114 &834682849 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2646474064028538988, guid: 7b9627e968b3350478f0475b688e01f8, type: 3}
+  m_PrefabInstance: {fileID: 6312772816399640332}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &860120255
 GameObject:
   m_ObjectHideFlags: 0
@@ -2760,6 +2773,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d65fa05b2ec0c84a98507e372baffe0, type: 3}
+--- !u!114 &1161277603 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8399382364634248809, guid: 7b9627e968b3350478f0475b688e01f8, type: 3}
+  m_PrefabInstance: {fileID: 6312772816399640332}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1162338811
 GameObject:
   m_ObjectHideFlags: 0
@@ -3062,6 +3086,7 @@ MonoBehaviour:
       Data4: 47992057
     Path: event:/retro-gun-shot
   visualEffect: {fileID: 2078065107}
+  ammoText: {fileID: 834682849}
 --- !u!212 &1289872361
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3655,6 +3680,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1807394264}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1824978033 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3223685987097581799, guid: 7b9627e968b3350478f0475b688e01f8, type: 3}
+  m_PrefabInstance: {fileID: 6312772816399640332}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1837566698
 GameObject:
   m_ObjectHideFlags: 0
@@ -3930,7 +3966,7 @@ Transform:
   m_GameObject: {fileID: 2060045919}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -51.12, y: 12.8, z: -9.89}
+  m_LocalPosition: {x: -51.12, y: 13.56, z: -9.89}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
