@@ -54,15 +54,15 @@ public class CraftingStation : MonoBehaviour
             inputInventory.RemoveItems(inputItem.item, inputItem.amount);
         }
 
-        CraftingRecipe.RecipeItem outputItem = recipes[currentRecipe].outputItem;
+        List<CraftingRecipe.RecipeItem> outputItems = recipes[currentRecipe].outputItem;
 
-        for (int i = 0; i < outputItem.amount; i++)
+        for (int i = 0; i < outputItems.Count; i++)
         {
             //outputInventory.AddItemToInventory(outputItem.item);
-            _dropItem.Drop(outputItem.item);
+            _dropItem.Drop(outputItems[i].item);
         }
 
-        Debug.Log("Crafted!");
+        //Debug.Log("Crafted!");
     }
 
     public bool PlaceItemInCraftingStation(ItemSlot itemSlot)

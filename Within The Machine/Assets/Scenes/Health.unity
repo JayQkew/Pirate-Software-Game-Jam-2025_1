@@ -1460,7 +1460,11 @@ MonoBehaviour:
     stackValue: 1
   - itemData: {fileID: 0}
     stackValue: 0
-  inventorySize: 0
+  - itemData: {fileID: 0}
+    stackValue: 0
+  - itemData: {fileID: 0}
+    stackValue: 0
+  inventorySize: 6
   isRestricted: 0
   onlyContains: []
   notContains: []
@@ -1866,7 +1870,7 @@ GameObject:
   - component: {fileID: 805940444}
   m_Layer: 0
   m_Name: morta
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1887,7 +1891,7 @@ MonoBehaviour:
   damage: 5
   range: 150
   fireRate: 0.25
-  shotAmmoCost: 0
+  shotAmmoCost: 10
   canFire: 1
   currentAmmo: 0
   canSeeEnemy: 1
@@ -2004,7 +2008,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 2.42, y: -6.04}
+  m_Offset: {x: 0.07, y: -6.04}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.28866667}
@@ -2015,7 +2019,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4.86, y: 4.08}
+  m_Size: {x: 6.89, y: 4.08}
   m_EdgeRadius: 0
 --- !u!1 &860120255
 GameObject:
@@ -2803,10 +2807,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemsInInventory:
-  - itemData: {fileID: 11400000, guid: 31936b689f362054d9a8f9be2b1fc718, type: 2}
-    stackValue: 2
-  - itemData: {fileID: 11400000, guid: 31936b689f362054d9a8f9be2b1fc718, type: 2}
-    stackValue: 1
+  - itemData: {fileID: 0}
+    stackValue: 0
+  - itemData: {fileID: 0}
+    stackValue: 0
+  - itemData: {fileID: 0}
+    stackValue: 0
+  - itemData: {fileID: 0}
+    stackValue: 0
+  - itemData: {fileID: 0}
+    stackValue: 0
   - itemData: {fileID: 0}
     stackValue: 0
   inventorySize: 3

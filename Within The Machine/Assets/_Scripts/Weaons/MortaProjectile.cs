@@ -63,7 +63,7 @@ public class MortaProjectile : MonoBehaviour
     
     private void Explode()
     {
-        Debug.Log("Explode");
+        //Debug.Log("Explode");
         GameObject obj = Instantiate(explodeEffect, transform.position, Quaternion.identity);
         obj.GetComponent<Explosion>().Explode(damage, explosionRadius);
         Destroy(gameObject);

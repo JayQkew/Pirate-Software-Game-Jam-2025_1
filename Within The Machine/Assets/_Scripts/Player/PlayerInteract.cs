@@ -99,15 +99,18 @@ public class PlayerInteract : MonoBehaviour
                     {
                         Debug.Log("Furnace");
                         //Furnace code
+                        _playerInventory.PutInCraftingStation(handID.ID, _furnace);
                         return;
                     }
                     
                     else if (_weapon != null)
                     {
                         Debug.Log("Weapon");
+                        _playerInventory.PutInCraftingStation(handID.ID, _weapon);
                         //weapon code
                         return;
                     }
+                    
                     
                 }
             }

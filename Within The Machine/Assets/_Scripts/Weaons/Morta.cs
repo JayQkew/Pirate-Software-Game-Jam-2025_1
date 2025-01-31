@@ -17,7 +17,7 @@ public class WeaponController : Weapon
             return false;
         }
         
-        Debug.Log("Launching Morta!!");
+        //Debug.Log("Launching Morta!!");
         
         if (closestEnemy !=null)
             FireProjectile(closestEnemy.transform.position + Vector3.left * (arcDuration * closestEnemy.GetComponent<Enemy>().GetGroundSpeed()));

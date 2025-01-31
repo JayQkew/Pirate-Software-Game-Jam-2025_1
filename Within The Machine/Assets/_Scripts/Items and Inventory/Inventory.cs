@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,6 +31,11 @@ public class Inventory : MonoBehaviour
             else
                 Debug.Log($"{i}: {item.itemData.name} - {item.stackValue}");
         }
+    }
+
+    private void Awake()
+    {
+        inventorySize = itemsInInventory.Length;
     }
 
     public bool AddItemToInventory(Item item)

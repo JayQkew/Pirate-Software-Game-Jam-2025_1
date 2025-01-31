@@ -73,6 +73,11 @@ public class Furnace : MonoBehaviour
             fuelUsage = 0;
         }
     }
+    
+    public bool PlaceItemInCraftingStation(ItemSlot itemSlot)
+    {
+        return inputInventory.AddItemToInventory(itemSlot);
+    }
 
     
 }

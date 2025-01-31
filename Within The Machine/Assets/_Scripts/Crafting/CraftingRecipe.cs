@@ -15,5 +15,5 @@ public class CraftingRecipe : ScriptableObject
     
     public List<RecipeItem> inputItems = new List<RecipeItem>();
     //public List<RecipeItem> outputItems = new List<RecipeItem>();
-    public RecipeItem outputItem;
+    public List<RecipeItem> outputItem;
 }

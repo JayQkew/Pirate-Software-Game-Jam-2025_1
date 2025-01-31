@@ -101,17 +101,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2ec9f8550a820a41b42a63651d71e5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 7
+  maxHealth: 5
   moveSpeed: 1.5
   damage: 5
   health: 0
   debuffSpeed: 0
   dropItems:
-  - {fileID: 11400000, guid: e4021f1fae0dcd54281a8753f8f70483, type: 2}
   - {fileID: 11400000, guid: abdbcb930991fe84cac1e62f3a7f913f, type: 2}
   dropChances:
-  - 40
-  - 40
+  - 100
   _paralaxLayers: {fileID: 0}
   rb: {fileID: 3470290116137902848}
   _dropItem: {fileID: -8632667019639863015}

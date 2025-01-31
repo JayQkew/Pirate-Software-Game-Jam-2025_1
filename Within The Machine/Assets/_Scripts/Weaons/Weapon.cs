@@ -94,7 +94,7 @@ public class Weapon : MonoBehaviour
 
     protected IEnumerator StartCoolDown()
     {
-        Debug.Log("StartCoolDown");
+        //Debug.Log("StartCoolDown");
         canFire = false;
         yield return new WaitForSeconds(1 / fireRate);
         canFire = true;
@@ -111,5 +111,10 @@ public class Weapon : MonoBehaviour
         visualEffect.SetActive(true);
         yield return new WaitForSeconds(0.11f);
         visualEffect.SetActive(false);
+    }
+
+    public bool PlaceItemInCraftingStation(ItemSlot itemSlot)
+    {
+        return inputInventory.AddItemToInventory(itemSlot);
     }
 }
