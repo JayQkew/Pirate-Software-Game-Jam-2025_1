@@ -41,12 +41,12 @@ public class WeaponController : Weapon
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy"); // Tag enemies with "Enemy"
         GameObject closest = null;
-        float shortestDistance = Mathf.Infinity;
+        float shortestDistance = range;
 
         foreach (GameObject enemy in enemies)
         {
             float distance = Vector3.Distance(transform.position, enemy.transform.position);
-            if (distance < shortestDistance)
+            if (distance <= shortestDistance)
             {
                 shortestDistance = distance;
                 closest = enemy;
