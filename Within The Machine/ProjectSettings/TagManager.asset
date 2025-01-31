@@ -9,6 +9,8 @@ TagManager:
   - Station
   - Volcano
   - FloorTag
+  - Furnace
+  - Weapon
   layers:
   - Default
   - TransparentFX
