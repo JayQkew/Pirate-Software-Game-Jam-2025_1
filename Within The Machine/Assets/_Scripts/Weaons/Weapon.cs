@@ -9,7 +9,7 @@ public class Weapon : MonoBehaviour
     [SerializeField]
     private Inventory inputInventory;
 
-    [SerializeField] protected EventReference fireSound;
+    
     
     [Header("Stats")]
     public float damage;
@@ -22,6 +22,11 @@ public class Weapon : MonoBehaviour
     public bool canFire;
     public float currentAmmo;
     public bool canSeeEnemy;
+    
+    [Header("Effects")]
+    [SerializeField] protected EventReference fireSound;
+
+    [SerializeField] private GameObject visualEffect;
 
     
 
@@ -33,7 +38,7 @@ public class Weapon : MonoBehaviour
 
         if (FireWeapon())
         {
-            PlaySound();
+            PlayEffect();
             currentAmmo -= shotAmmoCost;
             StartCoroutine(StartCoolDown());
         }
@@ -95,8 +100,16 @@ public class Weapon : MonoBehaviour
         canFire = true;
     }
 
-    void PlaySound()
+    void PlayEffect()
     {
         FMODUnity.RuntimeManager.PlayOneShot(fireSound);
+        StartCoroutine(VisualEffect());
+    }
+
+    IEnumerator VisualEffect()
+    {
+        visualEffect.SetActive(true);
+        yield return new WaitForSeconds(0.11f);
+        visualEffect.SetActive(false);
     }
 }

@@ -18,12 +18,16 @@ public class CameraZoomController : MonoBehaviour
     //private Vector3 targetPosition;
     private float targetZoom;
 
-    private float currentZoomValue;
+    [SerializeField] private float currentZoomValue;
 
     private void Start()
     {
         cam = GetComponent<Camera>();
         MoveAndZoom();
+        foreach (var tank in tankExteriors)
+        {
+            tank.gameObject.SetActive(true);
+        }
     }
 
     private void Update()
