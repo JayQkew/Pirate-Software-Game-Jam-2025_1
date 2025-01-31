@@ -3072,7 +3072,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 407105969
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 0c08227720492c545bc5d22396f52827, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -3410,6 +3410,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 720744657592115184, guid: 7b9627e968b3350478f0475b688e01f8, type: 3}
+      propertyPath: m_Points.Array.data[0].x
+      value: -6.9189034
+      objectReference: {fileID: 0}
+    - target: {fileID: 720744657592115184, guid: 7b9627e968b3350478f0475b688e01f8, type: 3}
+      propertyPath: m_Points.Array.data[0].y
+      value: 1.5481462
+      objectReference: {fileID: 0}
     - target: {fileID: 3736352815151262950, guid: 7b9627e968b3350478f0475b688e01f8, type: 3}
       propertyPath: m_Name
       value: Mech GUI
@@ -3417,6 +3425,14 @@ PrefabInstance:
     - target: {fileID: 5105562026471320890, guid: 7b9627e968b3350478f0475b688e01f8, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5118140464733048869, guid: 7b9627e968b3350478f0475b688e01f8, type: 3}
+      propertyPath: m_Points.Array.data[18].x
+      value: 8.998058
+      objectReference: {fileID: 0}
+    - target: {fileID: 5118140464733048869, guid: 7b9627e968b3350478f0475b688e01f8, type: 3}
+      propertyPath: m_Points.Array.data[18].y
+      value: 9.859521
       objectReference: {fileID: 0}
     - target: {fileID: 5572659221024010272, guid: 7b9627e968b3350478f0475b688e01f8, type: 3}
       propertyPath: m_Enabled
