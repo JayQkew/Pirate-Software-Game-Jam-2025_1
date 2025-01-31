@@ -55,6 +55,9 @@ TagManager:
   - name: Player
     uniqueID: 1808312453
     locked: 0
+  - name: Items
+    uniqueID: 717275523
+    locked: 0
   - name: Mech Foreground
     uniqueID: 407105969
     locked: 0
