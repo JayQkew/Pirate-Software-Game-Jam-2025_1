@@ -9,12 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Putting together.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
-    path: Assets/Scenes/Health.unity
-    guid: c9abd0ef74d6dfd40a543d0251fc7793
+    path: Assets/Scenes/StartS.unity
+    guid: e86634b07a343df4aa2ceb8408e3f566
   - enabled: 1
     path: Assets/Scenes/end.unity
     guid: cc5481adf72afdf44a6ded92ee1690bd
   - enabled: 1
-    path: Assets/Scenes/StartS.unity
-    guid: e86634b07a343df4aa2ceb8408e3f566
+    path: Assets/Scenes/Health.unity
+    guid: c9abd0ef74d6dfd40a543d0251fc7793
   m_configObjects: {}
